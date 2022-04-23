@@ -1,184 +1,357 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
-	<head>
-	    <title>Makaan - Real Estate HTML Template</title>
-		<c:import url="/WEB-INF/views/parts/head.jsp" />
-	</head>
-	<body>
-	    <div class="container-xxl bg-white p-0">
-	        <!-- Spinner Start -->
-	        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-	            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-	                <span class="sr-only">Loading...</span>
-	            </div>
-	        </div>
-	        <!-- Spinner End -->
-	
-	        <!-- Navbar Start -->
-			<c:import url="/WEB-INF/views/parts/navi.jsp" />
-	        <!-- Navbar End -->	
-	
-	        <!-- Header Start -->
-	        <div class="container-fluid header bg-white p-0">
-	            <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
-	                <div class="col-md-6 p-5 mt-lg-5">
-	                    <h1 class="display-5 animated fadeIn mb-4">Contact Us</h1> 
-	                        <nav aria-label="breadcrumb animated fadeIn">
-	                        <ol class="breadcrumb text-uppercase">
-	                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-	                            <li class="breadcrumb-item"><a href="#">Pages</a></li>
-	                            <li class="breadcrumb-item text-body active" aria-current="page">Contact</li>
-	                        </ol>
-	                    </nav>
-	                </div>
-	                <div class="col-md-6 animated fadeIn">
-	                    <img class="img-fluid" src="${ pageContext.servletContext.contextPath }/resources/img/header.jpg" alt="">
-	                </div>
-	            </div>
-	        </div>
-	        <!-- Header End -->
-	
-	
-	        <!-- Search Start -->
-	        <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
-	            <div class="container">
-	                <div class="row g-2">
-	                    <div class="col-md-10">
-	                        <div class="row g-2">
-	                            <div class="col-md-4">
-	                                <input type="text" class="form-control border-0 py-3" placeholder="Search Keyword">
-	                            </div>
-	                            <div class="col-md-4">
-	                                <select class="form-select border-0 py-3">
-	                                    <option selected>Property Type</option>
-	                                    <option value="1">Property Type 1</option>
-	                                    <option value="2">Property Type 2</option>
-	                                    <option value="3">Property Type 3</option>
-	                                </select>
-	                            </div>
-	                            <div class="col-md-4">
-	                                <select class="form-select border-0 py-3">
-	                                    <option selected>Location</option>
-	                                    <option value="1">Location 1</option>
-	                                    <option value="2">Location 2</option>
-	                                    <option value="3">Location 3</option>
-	                                </select>
-	                            </div>
-	                        </div>
-	                    </div>
-	                    <div class="col-md-2">
-	                        <button class="btn btn-dark border-0 w-100 py-3">Search</button>
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-	        <!-- Search End -->
-	
-	
-	        <!-- Contact Start -->
-	        <div class="container-xxl py-5">
-	            <div class="container">
-	                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-	                    <h1 class="mb-3">Contact Us</h1>
-	                    <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
-	                </div>
-	                <div class="row g-4">
-	                    <div class="col-12">
-	                        <div class="row gy-4">
-	                            <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.1s">
-	                                <div class="bg-light rounded p-3">
-	                                    <div class="d-flex align-items-center bg-white rounded p-3" style="border: 1px dashed rgba(0, 185, 142, .3)">
-	                                        <div class="icon me-3" style="width: 45px; height: 45px;">
-	                                            <i class="fa fa-map-marker-alt text-primary"></i>
-	                                        </div>
-	                                        <span>123 Street, New York, USA</span>
-	                                    </div>
-	                                </div>
-	                            </div>
-	                            <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.3s">
-	                                <div class="bg-light rounded p-3">
-	                                    <div class="d-flex align-items-center bg-white rounded p-3" style="border: 1px dashed rgba(0, 185, 142, .3)">
-	                                        <div class="icon me-3" style="width: 45px; height: 45px;">
-	                                            <i class="fa fa-envelope-open text-primary"></i>
-	                                        </div>
-	                                        <span>info@example.com</span>
-	                                    </div>
-	                                </div>
-	                            </div>
-	                            <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.5s">
-	                                <div class="bg-light rounded p-3">
-	                                    <div class="d-flex align-items-center bg-white rounded p-3" style="border: 1px dashed rgba(0, 185, 142, .3)">
-	                                        <div class="icon me-3" style="width: 45px; height: 45px;">
-	                                            <i class="fa fa-phone-alt text-primary"></i>
-	                                        </div>
-	                                        <span>+012 345 6789</span>
-	                                    </div>
-	                                </div>
-	                            </div>
-	                        </div>
-	                    </div>
-	                    <div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-	                        <iframe class="position-relative rounded w-100 h-100"
-	                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd"
-	                            frameborder="0" style="min-height: 400px; border:0;" allowfullscreen="" aria-hidden="false"
-	                            tabindex="0"></iframe>
-	                    </div>
-	                    <div class="col-md-6">
-	                        <div class="wow fadeInUp" data-wow-delay="0.5s">
-	                            <p class="mb-4">The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p>
-	                            <form>
-	                                <div class="row g-3">
-	                                    <div class="col-md-6">
-	                                        <div class="form-floating">
-	                                            <input type="text" class="form-control" id="name" placeholder="Your Name">
-	                                            <label for="name">Your Name</label>
-	                                        </div>
-	                                    </div>
-	                                    <div class="col-md-6">
-	                                        <div class="form-floating">
-	                                            <input type="email" class="form-control" id="email" placeholder="Your Email">
-	                                            <label for="email">Your Email</label>
-	                                        </div>
-	                                    </div>
-	                                    <div class="col-12">
-	                                        <div class="form-floating">
-	                                            <input type="text" class="form-control" id="subject" placeholder="Subject">
-	                                            <label for="subject">Subject</label>
-	                                        </div>
-	                                    </div>
-	                                    <div class="col-12">
-	                                        <div class="form-floating">
-	                                            <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 150px"></textarea>
-	                                            <label for="message">Message</label>
-	                                        </div>
-	                                    </div>
-	                                    <div class="col-12">
-	                                        <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
-	                                    </div>
-	                                </div>
-	                            </form>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-	        <!-- Contact End -->
-	
-	
-	        <!-- Footer Start -->
-	        <c:import url="/WEB-INF/views/parts/footer.jsp" />
-	        <!-- Footer End -->
-	
-	
-	        <!-- Back to Top -->
-	        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-	    </div>
-	
-	    <!-- JavaScript Libraries -->
-		<c:import url="/WEB-INF/views/parts/foot.jsp" />
-	</body>
+<head>
+<style>
+table {
+	width: 100%;
+	border: 0px solid #444444;
+	border-collapse: collapse;
+}
+
+.tdd td {
+	border: 0px solid #444444;
+}
+
+.myline {
+	height: 1px;
+	opacity: 0.4;
+	background-color: gray;
+}
+
+.ban {
+	height:150px;
+	width:250px;
+	background-color:lightgray;
+}
+
+#face {
+	border-radius: 49px;
+	background-color: lightgray;
+	margin: 10px;
+	width: 100px;
+	height: 100px;
+}
+
+.mynum {
+	position: relative;
+	top: -20px
+}
+
+input[type="radio"] {
+	display: none;
+}
+
+input[type="radio"]+label {
+	display: inline-block;
+	font-size: 18px;
+	font-weight: nomal;
+	padding: 10px;
+	opacity: 0.7;
+	cursor: pointer;
+}
+
+input[type="radio"]:checked+label {
+	color: black;
+	font-size: 20px;
+	opacity: 1;
+	font-weight: bolder;
+}
+
+.conbox {
+	margin: 0 auto;
+	display: none;
+}
+
+input[id="tab01"]:checked ~ .con1 {
+	display: block;
+}
+
+input[id="tab02"]:checked ~ .con2 {
+	display: block;
+}
+
+input[id="tab03"]:checked ~ .con3 {
+	display: block;
+}
+
+input[id="tab04"]:checked ~ .con4 {
+	display: block;
+}
+textarea#t2 {
+	width: 80%;
+	height: 200px;
+	padding: 10px;
+	box-sizing: border-box;
+	border: solid 2px #1E90FF;
+	border-radius: 5px;
+	font-size: 14px;
+	resize: none;
+}
+
+
+
+.fileBox input[type="file"] {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+</style>
+
+<title>Makaan - Real Estate HTML Template</title>
+<c:import url="/WEB-INF/views/parts/head.jsp" />
+</head>
+<body>
+	<div class="container-xxl bg-white p-0">
+		<!-- Spinner Start -->
+		<div id="spinner"
+			class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+			<div class="spinner-border text-primary"
+				style="width: 3rem; height: 3rem;" role="status">
+				<span class="sr-only">Loading...</span>
+			</div>
+		</div>
+		<!-- Spinner End -->
+
+		<!-- Navbar Start -->
+		<c:import url="/WEB-INF/views/parts/navi.jsp" />
+		<!-- Navbar End -->
+
+		<!-- Header Start -->
+		<div class="container-fluid header bg-white p-5">
+			<br>
+		</div>
+
+
+		<!-- Header End -->
+
+
+
+
+
+		<!-- Team Start -->
+		<div class="container-xxl py-3">
+			<div class="container">
+				<br>
+				<div class="row g-4">
+					<div class="col-lg-12 col-md-12 wow fadeInUp" data-wow-delay="0.1s">
+						<div class="team-item rounded overflow-hidden">
+							<div class="p-3 mt-1">
+								<table class="tdd">
+									<tr height="10px">
+										<td rowspan="4" width="100px">
+											<div id="face"></div>
+
+										</td>
+										<td width="76px"><div style="width: 75px;">
+												<h5 class="fw-bold mb-0">관 리 자</h5>
+											</div></td>
+										<td width="28%"><small style="color: #41CE96;">01</small></td>
+										<td rowspan="2" colspan="2" align="right"><a href="#"
+											class="btn btn-outline-primary active" style="box-shadow: none;">수정하기</a>
+										</td>
+											
+
+									</tr>
+									<tr height="20px">
+										<td colspan="2" align="left"><small><b>user01@naver.com</b></small></td>
+									</tr>
+									<tr height="0px">
+										<td colspan="4"><div class="myline" style="width:100%"></div>
+											<div style=""></div></td>
+									</tr>
+									<tr>
+										
+										<td colspan="2" class="text-center"><b style="opacity: 0.8">신고된사진</b></td>
+										<td colspan="2" width="56%" class="text-center"><b
+											style="opacity: 0.8">전체 게시글</b></td>
+										
+									</tr>
+									<tr>
+										<td height="30px"></td>
+										
+										<td colspan="2" class="text-center" style=""><div
+												style="height: 70px;">
+												<b class="mynum" style="opacity:0.5;font-size: 80px; color: red">30</b>
+											</div></td>
+										<td colspan="2" class="text-center" style=""><div
+												style="height: 70px;">
+												<b class="mynum" style="font-size: 80px; color: #ADE8CE">150</b>
+											</div></td>
+										
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-lg-12 col-md-12 wow fadeInUp" data-wow-delay="0.1s">
+						<div class="team-item rounded overflow-hidden">
+							<div class="p-4 mt-1">
+								<div class="tab_content">
+									<input type="radio" name="tabmenu" id="tab01" checked>
+									<label for="tab01">베너 등록</label> 
+									<input type="radio" name="tabmenu" id="tab02"> 
+									<label for="tab02">베너 삭제</label>
+									<input type="radio" name="tabmenu" id="tab03"> 
+									<label for="tab03">회원관리</label>
+									<input type="radio" name="tabmenu" id="tab04"> 
+									<label for="tab04">신고된 사진</label>
+
+									<div class="conbox con1">
+									<form>
+										<br>
+										<div class="myline"></div>
+										<br><br>
+										<!-- 베너등록창 -->
+										<div class="fileBox" align="center">
+											<div style="width:80%" align="left">
+											<input type="text" class="fileName" readonly="readonly" style="width:400px; height:40px;padding-left:10px;margin-right:10px;">
+											<label for="uploadBtn" class="btn btn-outline-primary active" style="padding:10px; height:42px; box-shadow: none;">베너이미지 업로드</label> <input
+												type="file" id="uploadBtn" class="uploadBtn" accept="image/png, image/jpeg">
+											</div>
+										</div>
+										<div style="padding-top:20px;" align="center">
+										
+										<input type="text" style="width:80%; padding:10px;"
+														placeholder="제목을 입력하세요..."
+														onfocus="this.placeholder=''"
+														onblur="this.placeholder='제목을 입력하세요...'"
+														name="title" />
+										</div>
+										<div style="padding-top:20px" align="center">
+										<textarea style="font-size:16px;" rows="10" id="t2" name="board_content" placeholder="내용을 입력하세요..."
+														onfocus="this.placeholder=''"
+														onblur="this.placeholder='내용을 입력하세요...'"></textarea>
+										</div>										
+										<div style="padding-top:15px" align="center">
+											<div style="width:80%" align="right">
+											<a href="#"
+												class="btn btn-outline-primary active" style="box-shadow: none;">&nbsp;등 록&nbsp;</a>
+											</div>
+										</div>
+										<br>
+									</form>
+									</div>
+
+									<div class="conbox con2">
+										<br>
+										<div class="myline"></div>
+										<br>
+										<div align="center">
+										<!-- 베너삭제창 -->
+										<table class="tdd" style="width:80%;">
+											<!-- 분리 -->
+											<tr>
+												<td colspan="3">&nbsp;</td>
+											</tr>
+											<tr>
+												<td rowspan="2" style="width:270px; padding-right: 20px;"><div class="ban"></div></td>
+												<td style="height:15px; vertical-align:top; padding-bottom:10px;"><b style="font-size:18px;">제목 텍스트</b></td>
+												<td rowspan="2" style="width:10%;vertical-align:top; text-align:center;"><a href="#"
+												class="btn btn-outline-primary active" style="box-shadow: none;">&nbsp;삭제&nbsp;</a></td>
+											</tr>
+											<tr>
+												<td style="vertical-align:top;"><div style="opacity:0.8;">
+												내용 텍스트 들어갈곳 줄바꿈 포함으로 작성예정<br>
+												내용 텍스트 들어갈곳 줄바꿈 줄바꿈 줄바꿈 포함으로 작성예정<br>
+												내용 텍스트 들어갈곳줄바꿈  줄바꿈 포함으로 작성예정<br>												
+												</div></td>												
+											</tr>
+											
+											<!-- 분리 -->
+											<tr>
+												<td colspan="3">&nbsp;</td>
+											</tr>
+											<tr>
+												<td rowspan="2" style="width:270px; padding-right: 20px;"><div class="ban"></div></td>
+												<td style="height:15px; vertical-align:top; padding-bottom:10px;"><b style="font-size:18px;">제목 텍스트</b></td>
+												<td rowspan="2" style="width:10%;vertical-align:top; text-align:center;"><a href="#"
+												class="btn btn-outline-primary active" style="box-shadow: none;">&nbsp;삭제&nbsp;</a></td>
+											</tr>
+											<tr>
+												<td style="vertical-align:top;"><div style="opacity:0.8;">
+												내용 텍스트 들어갈곳 줄바꿈 포함으로 작성예정<br>
+												내용 텍스트 들어갈곳 줄바꿈 줄바꿈 줄바꿈 포함으로 작성예정<br>
+												내용 텍스트 들어갈곳줄바꿈  줄바꿈 포함으로 작성예정<br>												
+												</div></td>												
+											</tr>
+											
+											<!-- 분리 -->
+											<tr>
+												<td colspan="3">&nbsp;</td>
+											</tr>
+											<tr>
+												<td rowspan="2" style="width:270px; padding-right: 20px;"><div class="ban"></div></td>
+												<td style="height:15px; vertical-align:top; padding-bottom:10px;"><b style="font-size:18px;">제목 텍스트</b></td>
+												<td rowspan="2" style="width:10%;vertical-align:top; text-align:center;"><a href="#"
+												class="btn btn-outline-primary active" style="box-shadow: none;">&nbsp;삭제&nbsp;</a></td>
+											</tr>
+											<tr>
+												<td style="vertical-align:top;"><div style="opacity:0.8;">
+												내용 텍스트 들어갈곳 줄바꿈 포함으로 작성예정<br>
+												내용 텍스트 들어갈곳 줄바꿈 줄바꿈 줄바꿈 포함으로 작성예정<br>
+												내용 텍스트 들어갈곳줄바꿈  줄바꿈 포함으로 작성예정<br>												
+												</div></td>												
+											</tr>
+											
+											<!-- 분리 -->
+											
+										</table>									
+										</div>
+										<br><br>
+										<div class="myline"></div>
+										<br>
+									</div>
+									<div class="conbox con3">
+										<br>
+										<div class="myline"></div>
+										<br>
+										<div style="height: 600px; width: 200px;">
+										회원관리창
+										</div>
+
+									</div>
+									<div class="conbox con4">
+										<br>
+										<div class="myline"></div>
+										<br>
+										<div style="height: 600px; width: 200px;">
+										신고된 사진 창
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- Team End -->
+
+
+		<!-- Footer Start -->
+		<c:import url="/WEB-INF/views/parts/footer.jsp" />
+		<!-- Footer End -->
+
+
+		<!-- Back to Top -->
+		<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
+			class="bi bi-arrow-up"></i></a>
+	</div>
+
+	<c:import url="/WEB-INF/views/parts/foot.jsp" />
+</body>
+<script type="text/javascript">
+var uploadFile = $('.fileBox .uploadBtn');
+uploadFile.on('change', function(){
+	if(window.FileReader){
+		var filename = $(this)[0].files[0].name;
+	} else {
+		var filename = $(this).val().split('/').pop().split('\\').pop();
+	}
+	$(this).siblings('.fileName').val(filename);
+});
+</script>
 </html>
