@@ -14,25 +14,13 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto">
                 <a href="/landmarker/" class="nav-item nav-link active">Home</a>
-                <a href="about.do" class="nav-item nav-link">About</a>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Property</a>
-                    <div class="dropdown-menu rounded-0 m-0">
-                        <a href="propertyList.do" class="dropdown-item">Property List</a>
-                        <a href="propertyType.do" class="dropdown-item">Property Type</a>
-                        <a href="propertyAgent.do" class="dropdown-item">Property Agent</a>
-                    </div>
-                </div>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                    <div class="dropdown-menu rounded-0 m-0">
-                        <a href="testImonial.do" class="dropdown-item">Testimonial</a>
-                        <a href="error404.do" class="dropdown-item">404 Error</a>
-                    </div>
-                </div>
-                <a href="contact.do" class="nav-item nav-link">Contact</a>
+                
+                <a href="#" class="nav-item nav-link">Gallery</a>
+                <a href="#" class="nav-item nav-link">Login</a> 
+            	<a href="mypage.do" class="nav-item nav-link">Mytest</a>               
+                <a href="admin.do" class="nav-item nav-link">Admin</a>
             </div>
-            <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a>
+            <a href="" class="btn btn-primary px-3 d-none d-lg-flex">사진으로 랜드마크 검색</a>
         </div>
     </nav>
 </div>
