@@ -22,9 +22,23 @@ $(function(){
 		console.log("성공");
 		$.ajax({
 			url:"naverLogin.do",
+			type: "POST",
+			data: new FormData($("#test")[0]),
 			dataType: "json",
+			enctype: 'multipart/form-data',
+			processData: false,
+			contentType: false,
+			cache: false,
 			success: function(result){
 				console.log(result);
+				values = "<a href='https://kauth.kakao.com/oauth/authorize?client_id=53ae3074ebb4e336e3b34b90ab5d2f8c&redirect_uri=http://localhost:8888/landmarker/kakaoLogin.do&response_type=code' class='bt'><img src='${ pageContext.servletContext.contextPath }/resources/userImages/kakao(eng).png'></a><br>"
+						+ "<a href='" + result.url + "'><img src='${ pageContext.servletContext.contextPath }/resources/userImages/naver(eng).png'></a><br>"
+						+ "<a href='googleLogin.do' class='bt'><img src='${ pageContext.servletContext.contextPath }/resources/userImages/google.png'></a>"
+						+ "<br> <br>"
+				$("#modal-body").html(values);
+			},
+			error: function () {
+				console.log("error");
 			}
 		})
 	})	
@@ -47,6 +61,7 @@ hr {
 	background-color: grey;
 }
 </style>
+<form id="test" action="dataPush.do"></form>
 <div class="container-fluid nav-bar bg-transparent">
     <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
         <a href="/landmarker/" class="navbar-brand d-flex align-items-center text-center">
@@ -101,16 +116,8 @@ hr {
 				<img
 					src="${ pageContext.servletContext.contextPath }/resources/userImages/landmarker.PNG">
 			</div>
-			<div class="modal-body" align="center">
-				<a
-					href="https://kauth.kakao.com/oauth/authorize?client_id=53ae3074ebb4e336e3b34b90ab5d2f8c&redirect_uri=http://localhost:8888/landmarker/kakaoLogin.do&response_type=code"
-					class="bt"><img
-					src="${ pageContext.servletContext.contextPath }/resources/userImages/kakao(eng).png"></a><br>
-				<a href="naverLogin.do"><img
-					src="${ pageContext.servletContext.contextPath }/resources/userImages/naver(eng).png"></a><br>
-				<a href="googleLogin.do" class="bt"><img
-					src="${ pageContext.servletContext.contextPath }/resources/userImages/google.png"></a>
-				<br> <br>
+			<div id="modal-body" class="modal-body" align="center">
+
 			</div>
 		</div>
 	</div>

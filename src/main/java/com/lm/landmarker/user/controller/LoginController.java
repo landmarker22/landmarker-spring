@@ -37,7 +37,8 @@ public class LoginController {
 	private UserService userService;
  
   //로그인 첫 화면 요청 메소드
-    @RequestMapping(value ="naverLogin.do", method = { RequestMethod.GET, RequestMethod.POST })
+    @RequestMapping(value = "naverLogin.do", method = RequestMethod.POST)
+	@ResponseBody
     public String login(Model model, HttpSession session) {
         
         /* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
@@ -50,6 +51,7 @@ public class LoginController {
         JSONObject url = new JSONObject();
         
         url.put("url", naverAuthUrl);
+        
 //        model.addAttribute("url", naverAuthUrl);        
         /* 생성한 인증 URL을 View로 전달 */
         return url.toJSONString();
