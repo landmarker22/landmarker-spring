@@ -72,5 +72,11 @@ public class HomeController {
 	public String testImonial() {
 		return "common/testimonial";
 	}
+
+	
+	@RequestMapping(value = "admin.do", method = RequestMethod.GET)
+	public String admin() {
+		return "user/adminpage";
+	}
 	
 }

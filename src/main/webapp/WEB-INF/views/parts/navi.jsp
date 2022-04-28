@@ -77,7 +77,7 @@ hr {
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto">
                 <a href="/landmarker/" class="nav-item nav-link active">Home</a>
-                <a href="about.do" class="nav-item nav-link">About</a>
+                <a href="#" class="nav-item nav-link">Gallery</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Property</a>
                     <div class="dropdown-menu rounded-0 m-0">
@@ -99,9 +99,11 @@ hr {
                 </c:if>
                 <c:if test="${ !empty sessionScope.loginUser }">
                 <a href="logout.do" class="nav-item nav-link" >logout</a>
+                <a href="mypage.do" class="nav-item nav-link">Mytest</a>               
+                <a href="admin.do" class="nav-item nav-link">Admin</a>
                 </c:if>
             </div>
-            <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a>
+            <a href="" class="btn btn-primary px-3 d-none d-lg-flex">사진으로 랜드마크 검색</a>
         </div>
     </nav>
     <div class="modal fade" id="exampleModal" tabindex="-1"

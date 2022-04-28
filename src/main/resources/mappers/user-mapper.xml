@@ -27,5 +27,83 @@
 		select * from l_user
 		where user_email = #{ user_email }
 	</select>
+
+	<!-- 송상언 -->
+	<select id="selectUserInfo" parameterType="int" resultType="User">
+		select * from l_user
+		where user_no = #{ user_no }
+	</select>
 	
+	<select id="galleryCount" parameterType="int" resultType="_int">
+		<![CDATA[
+		SELECT COUNT(*) FROM L_GALLERY WHERE USER_NO = #{user_no}
+		]]>
+	</select>
+	
+	<select id="likeCount" parameterType="int" resultType="_int">
+		<![CDATA[
+		SELECT COUNT(*) FROM L_LIKE WHERE USER_NO = #{user_no}
+		]]>
+	</select>
+	
+	
+	<resultMap type="gallery" id="resultGallery">
+		<id column="gallery_no" property="gallery_no" />
+		<result column="user_no" property="user_no" />
+		<result column="gallery_content" property="gallery_content" />
+		<result column="photo_path" property="photo_path" />
+		<result column="hashtag" property="hashtag" />
+		<result column="gallery_readcount" property="gallery_readcount" />
+		<result column="gallery_date" property="gallery_date" />
+	</resultMap>
+	<!-- 
+	<select id="myGalleryList" 
+	parameterType="HashMap" resultMap="resultGallery">
+		<![CDATA[
+			SELECT *
+			FROM ( SELECT ROWNUM RNUM, N.*
+			       FROM (SELECT G.BOARD_NO BOARD_NO, 
+			                    G.BOARD_REF BOARD_REF,
+			                    G.TRASH_NO TRASH_NO,
+			                    G.USER_NO USER_NO,
+			                    G.BOARD_CONTENT BOARD_CONTENT,
+			                    G.HASHTAG HASHTAG,
+			                    G.BOARD_READCOUNT BOARD_READCOUNT,
+			                    G.BOARD_DATE BOARD_DATE,
+			                    T.TRASH_PATH TRASH_PATH,
+			                    U.USER_NAME USER_NAME
+			             FROM L_GALLERY G
+			             LEFT JOIN T_TRASH T ON T.TRASH_NO = B.TRASH_NO 
+			             LEFT JOIN T_USER U ON U.USER_NO = T.USER_NO
+			             WHERE BOARD_NO = BOARD_REF
+			             ORDER BY BOARD_NO DESC) N)
+			WHERE RNUM >= #{ startRow } AND RNUM <= #{ endRow } 
+		]]>
+	</select> 
+	 -->
+	 <select id="likeList" parameterType="int" resultMap="resultGallery">
+		<![CDATA[
+			SELECT * FROM(SELECT G.GALLERY_NO GALLERY_NO, G.USER_NO USER_NO,
+					G.GALLERY_CONTENT GALLERY_CONTENT, G.PHOTO_PATH PHOTO_PATH, 
+					G.HASHTAG HASHTAG, G.GALLERY_READCOUNT GALLERY_READCOUNT
+					,G.GALLERY_DATE GALLERY_DATE, L.USER_NO LIKE_USER, L.GALLERY_NO LIKE_GALLERY
+			FROM L_LIKE L LEFT JOIN L_GALLERY G ON L.GALLERY_NO = G.GALLERY_NO)
+			WHERE LIKE_USER = #{ user_no }
+		]]>
+	</select> 
+	
+	<select id="selectMygallery" parameterType="hashMap" resultMap="resultGallery">
+		<![CDATA[
+		select * from (
+		select rownum num, g.* from (
+		select * from (select * from l_gallery
+		where user_no = #{user_no}) order by gallery_no desc) g)
+		where num >= ${startRow} and num <= ${endRow}
+		]]>
+	</select> 
+	<select id="updateUser" parameterType="User">
+		update l_user
+		set user_name = #{ user_name }		
+		where user_no = #{ user_no }
+	</select>
 </mapper>
