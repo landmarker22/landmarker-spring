@@ -51,7 +51,21 @@
         <beans:property name="uploadTempDir" value="temp"></beans:property>
         <beans:property name="defaultEncoding" value="utf-8"></beans:property> -->
 	</beans:bean>
-
+	
+	<!-- google Class Bean설정 추가 -->
+	<!-- 클라이언트ID와 보안비밀 세팅-->
+	<beans:bean id="googleConnectionFactory"
+		class="org.springframework.social.google.connect.GoogleConnectionFactory">
+		<beans:constructor-arg value="103387204834-fod1gl1s25hafvc4otqb4l704rvr4v3g.apps.googleusercontent.com" />
+		<beans:constructor-arg value="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" />
+	</beans:bean>
+	<!-- 승인된 자바스크립트 원본과 승인된 리디렉션 URI -->
+	<beans:bean id="googleOAuth2Parameters" class="org.springframework.social.oauth2.OAuth2Parameters">
+		<beans:property name="scope" value="https://www.googleapis.com/auth/plus.login" />
+		<beans:property name="redirectUri" value="http://localhost:8888/landmarker/googleCallback.do" />
+	</beans:bean>
+	
+	
 	<context:component-scan base-package="com.lm.landmarker" />
 	
 	<!-- NaverLoginBO Class에 대한 Bean설정 추가 -->

@@ -12,11 +12,12 @@ public class User implements java.io.Serializable {
 	private Date user_date;
 	private String login_ok;
 	private String user_badge;
+	private String dupCheck;
 	
 	public User() {}
 
 	public User(int user_no, String user_name, String user_email, String user_admin, Date user_date, String login_ok,
-			String user_badge) {
+			String user_badge, String dupCheck) {
 		super();
 		this.user_no = user_no;
 		this.user_name = user_name;
@@ -25,6 +26,7 @@ public class User implements java.io.Serializable {
 		this.user_date = user_date;
 		this.login_ok = login_ok;
 		this.user_badge = user_badge;
+		this.dupCheck = dupCheck;
 	}
 
 	public int getUser_no() {
@@ -83,6 +85,14 @@ public class User implements java.io.Serializable {
 		this.user_badge = user_badge;
 	}
 
+	public String getDupCheck() {
+		return dupCheck;
+	}
+
+	public void setDupCheck(String dupCheck) {
+		this.dupCheck = dupCheck;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -91,9 +101,11 @@ public class User implements java.io.Serializable {
 	public String toString() {
 		return "User [user_no=" + user_no + ", user_name=" + user_name + ", user_email=" + user_email + ", user_admin="
 				+ user_admin + ", user_date=" + user_date + ", login_ok=" + login_ok + ", user_badge=" + user_badge
-				+ "]";
+				+ ", dupCheck=" + dupCheck + "]";
 	}
 
+	
+	
 
 
 	
