@@ -9,8 +9,8 @@
 	</settings>
 	
 	<typeAliases>
-		<!-- <typeAlias type="com.lm.landmarker.user.model.vo.User" alias="User" /> -->
-		<!-- <typeAlias type="com.lm.landmarker.gallery.model.vo.Trash" alias="Gallery" /> -->
+		<typeAlias type="com.lm.landmarker.user.model.vo.User" alias="User" />
+		<typeAlias type="com.lm.landmarker.gallery.model.vo.Gallery" alias="Gallery" />
 		<!-- <typeAlias type="com.lm.landmarker.comment.model.vo.Category" alias="Comment" /> -->
 		<!-- <typeAlias type="com.lm.landmarker.like.model.vo.Notice" alias="Like" /> -->
 		<!-- <typeAlias type="com.lm.landmarker.landmark.model.vo.Board" alias="Landmark" /> -->
@@ -20,7 +20,7 @@
 	</typeAliases>
 	
 	<mappers>
-		<!-- <mapper resource="mappers/user-mapper.xml" /> -->
+		<mapper resource="mappers/user-mapper.xml" />
 	    <!-- <mapper resource="mappers/gallery-mapper.xml" />  -->
 		<!-- <mapper resource="mappers/comment-mapper.xml" /> -->
 		<!-- <mapper resource="mappers/like-mapper.xml" /> -->

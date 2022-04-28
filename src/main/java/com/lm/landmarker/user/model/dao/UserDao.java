@@ -16,8 +16,8 @@ public class UserDao {
 	@Autowired
 	private SqlSessionTemplate session;
 	
-	public User selectUser(int user_no) {
-		return session.selectOne("userMapper.selectUser", user_no);
+	public User selectUserInfo(int user_no) {
+		return session.selectOne("userMapper.selectUserInfo", user_no);
 	}
 
 	public int boardCount(int user_no) {
@@ -37,6 +37,11 @@ public class UserDao {
 	public ArrayList<Gallery> selectMygallery(Map<String, Object> map) {
 		List<Gallery> list = session.selectList("userMapper.selectMygallery", map);
 		return (ArrayList<Gallery>)list;
+	}
+
+	public int updateUser(User user) {
+		// TODO Auto-generated method stub
+		return session.update("userMapper.updateUser", user);
 	}
 
 }

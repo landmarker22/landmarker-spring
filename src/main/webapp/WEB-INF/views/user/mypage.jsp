@@ -66,6 +66,7 @@ input[type="radio"]:checked+label {
 	display: none;
 }
 
+
 input[id="tab01"]:checked ~ .con1 {
 	display: block;
 }
@@ -74,6 +75,26 @@ input[id="tab02"]:checked ~ .con2 {
 	display: block;
 }
 
+input[id="tab03"]:checked ~ .con3 {
+	display: block;
+}
+
+input[id="tab04"]:checked ~ .con4 {
+	display: block;
+}
+
+.btncheck {
+	display:block;
+}
+
+input[id="tab03"]:checked ~ .btn03 {
+	display: none;
+}
+input[id="tab04"]:checked ~ .btn04 {
+	display: none;
+}
+
+
 .search input {
 	width: 400px;
 	height: 30px;
@@ -81,10 +102,16 @@ input[id="tab02"]:checked ~ .con2 {
 	border-radius: 15px;
 }
 
-input::placeholder {
+#searchtag::placeholder {
 	text-align: center;
 	font-size: 14px;
 	opacity: 0.7;
+}
+
+#nametag::placeholder {
+	text-align: center;
+	font-size: 18px;
+	font-weight:700;
 }
 
 #btn1 {
@@ -107,6 +134,8 @@ img.photo {
 	height: 100%;
 	object-fit: cover;
 }
+
+
 </style>
 <title>Makaan - Real Estate HTML Template</title>
 <c:import url="/WEB-INF/views/parts/head.jsp" />
@@ -122,181 +151,149 @@ img.photo {
 			</div>
 		</div>
 		<!-- Spinner End -->
-
 		<!-- Navbar Start -->
 		<c:import url="/WEB-INF/views/parts/navi.jsp" />
 		<!-- Navbar End -->
-
 		<!-- Header Start -->
 		<div class="container-fluid header bg-white p-5">
 			<br>
 		</div>
-
-
 		<!-- Header End -->
-
-
 		<div class="container-xxl py-3">
 			<div class="container">
 				<br>
-				<div class="row g-4">
+				<div class="row g-4">					
+					<!-- ---------------------------------------- -->
 					<div class="col-lg-12 col-md-12 wow fadeInUp" data-wow-delay="0.1s">
 						<div class="team-item rounded overflow-hidden">
-							<div class="p-3 mt-1">
-								<table class="tdd">
-									<tr height="10px">
-										<td rowspan="4" width="100px">
-											<div id="face"></div>
-
-										</td>
-										<td width="76px"><div style="width: 75px;">
-												<h5 class="fw-bold mb-0" style="letter-spacing: 4px;">${ user.user_name }</h5>
-											</div></td>
-										<td width="28%"><small style="color: #41CE96;">여
-												행 중 독 자</small></td>
-										<td rowspan="2" colspan="2" align="right"><a href="#"
-											class="btn btn-outline-primary active"
-											style="box-shadow: none;">수정하기</a></td>
-
-
-									</tr>
-									<tr height="20px">
-										<td colspan="2" align="left"><small><b
-												style="text-transform: lowercase; letter-spacing: 0.5px; opacity: 0.5;">${ user.user_email }</b></small></td>
-									</tr>
-									<tr height="0px">
-										<td colspan="4"><div class="myline" width="100%"></div>
-											<div style=""></div></td>
-									</tr>
-									<tr>
-										<td></td>
-										<td class="text-center"><b style="opacity: 0.8">올린게시글</b></td>
-										<td width="28%" class="text-center"><b
-											style="opacity: 0.8">스크랩</b></td>
-										<td width="28%" class="text-center"><b
-											style="opacity: 0.8">벳지</b></td>
-									</tr>
-									<tr>
-										<td height="30px"></td>
-										<td></td>
-										<td class="text-center" style=""><div
-												style="height: 70px;">
-												<b class="mynum" style="font-size: 80px; color: #ADE8CE">${ board_count }</b>
-											</div></td>
-										<td class="text-center" style=""><div
-												style="height: 70px;">
-												<b class="mynum" style="font-size: 80px; color: #ADE8CE">${ scrap_count }</b>
-											</div></td>
-										<td class="text-center" style=""><div
-												style="height: 70px;">
-												<b class="mynum" style="font-size: 80px; color: #FFC154">0</b>
-											</div></td>
-									</tr>
-								</table>
-							</div>
+							<div class="tab_content">
+									<input type="radio" name="mymenu" id="tab04">
+									<div class="btncheck btn04" style="text-align:right; margin:-30px 17px 0px 0px;
+									position:relative; top:65px">
+									<label for="tab04">
+										<a class="btn btn-outline-primary active" style="box-shadow: none;">수정하기</a>
+									</label>
+									</div> 
+									<input type="radio" name="mymenu" id="tab03" checked> 
+									<div class="btncheck btn03" style="text-align:right; margin:-30px 17px 0px 0px;
+									position:relative; top:92px; width:100px; float:right;">
+									<label for="tab03">
+										<a class="btn btn-outline-primary active" style="box-shadow: none;">취 소</a>
+									</label>
+									</div>	
+								<div class="p-3 mt-1 conbox con3">
+									<table class="tdd">
+										<tr height="10px">
+											<td rowspan="4" width="100px">
+												<div id="face"></div>
+	
+											</td>
+											<td width="76px"><div style="width: 75px;">
+													<h5 class="fw-bold mb-0" style="letter-spacing: 4px;">${ user.user_name }</h5>
+												</div></td>
+											<td width="28%"><small style="color: #41CE96;">여
+													행 중 독 자</small></td>
+											<td rowspan="2" colspan="2" align="right"></td>
+	
+	
+										</tr>
+										<tr height="20px">
+											<td colspan="2" align="left"><small><b
+													style="text-transform: lowercase; letter-spacing: 0.5px; opacity: 0.5;">${ user.user_email }</b></small></td>
+										</tr>
+										<tr height="0px">
+											<td colspan="4"><div class="myline" width="100%"></div>
+												<div style=""></div></td>
+										</tr>
+										<tr>
+											<td></td>
+											<td class="text-center"><b style="opacity: 0.8">올린게시글</b></td>
+											<td width="28%" class="text-center"><b
+												style="opacity: 0.8">스크랩</b></td>
+											<td width="28%" class="text-center"><b
+												style="opacity: 0.8">벳지</b></td>
+										</tr>
+										<tr>
+											<td height="30px"></td>
+											<td></td>
+											<td class="text-center" style=""><div
+													style="height: 70px;">
+													<b class="mynum" style="font-size: 80px; color: #ADE8CE">${ board_count }</b>
+												</div></td>
+											<td class="text-center" style=""><div
+													style="height: 70px;">
+													<b class="mynum" style="font-size: 80px; color: #ADE8CE">${ scrap_count }</b>
+												</div></td>
+											<td class="text-center" style=""><div
+													style="height: 70px;">
+													<b class="mynum" style="font-size: 80px; color: #FFC154">0</b>
+												</div></td>
+										</tr>
+									</table>
+								</div>
+								<div class="p-3 mt-1 conbox con4">
+									<form action="userupdate.do" method="post">
+									<table class="tdd">
+										<tr height="10px">
+											<td rowspan="4" width="100px">
+												<div id="face"></div>
+	
+											</td>
+											<td width="76px"><div style="width: 75px;">
+													<h5 class="fw-bold mb-0" style="letter-spacing: 4px;">
+													<input id="nametag" type="text" name="username" style="letter-spacing: 4px; width:80px; 
+													text-align:center; position:relative; top:10px;" placeholder="${ user.user_name }"></h5>
+												</div></td>
+											<td width="28%"><small style="color: #41CE96;"></small></td>
+											<td colspan="2" align="right">
+												<button class="btn btn-outline-primary active" type="submit" style="box-shadow: none;color:white; background-color:#0CAC82;">저 장</button>
+											</td>
+	
+	
+										</tr>
+										<tr height="20px">
+											<td colspan="2" align="left">
+												<small><b
+													style="text-transform: lowercase; letter-spacing: 0.5px; opacity: 0.5;">${ user.user_email }</b></small>
+											</td>
+											<td colspan="2" align="right" style="height:50px;">
+											
+											</td>
+										</tr>
+										<tr height="0px">
+											<td colspan="4"><div class="myline" width="100%"></div>
+												<div style=""></div></td>
+										</tr>
+										<tr>
+											<td></td>
+											<td class="text-center"><b style="opacity: 0.8">올린게시글</b></td>
+											<td width="28%" class="text-center"><b
+												style="opacity: 0.8">스크랩</b></td>
+											<td width="28%" class="text-center"><b
+												style="opacity: 0.8">벳지</b></td>
+										</tr>
+										<tr>
+											<td height="30px"></td>
+											<td></td>
+											<td class="text-center" style=""><div
+													style="height: 70px;">
+													<b class="mynum" style="font-size: 80px; color: #ADE8CE">${ board_count }</b>
+												</div></td>
+											<td class="text-center" style=""><div
+													style="height: 70px;">
+													<b class="mynum" style="font-size: 80px; color: #ADE8CE">${ scrap_count }</b>
+												</div></td>
+											<td class="text-center" style=""><div
+													style="height: 70px;">
+													<b class="mynum" style="font-size: 80px; color: #FFC154">0</b>
+												</div></td>
+										</tr>
+									</table>
+									</form>
+								</div>
+							</div>	
 						</div>
-					</div>
-					<!-- 올린게시물 게시물형식 -->
-					<%-- <div class="col-lg-12 col-md-12 wow fadeInUp" data-wow-delay="0.1s">
-						<div class="team-item rounded overflow-hidden">
-							<div class=" p-4 mt-1">
-								<table class="tdd">
-									<tr>
-										<td width="160px"><h5 class="fw-bold mb-0">올린게시물</h5></td>
-										<td width="190px"></td>
-										<td width="100px" align="right"><b style="color: orange;">${ board_count }</b></td>
-									</tr>
-									<tr height="30px">
-										<td colspan="3"><div class="myline"></div></td>
-									</tr>
-									<tr height="40px">
-										<td><b>동대문역사문화공원</b></td>
-										<td><b style="opacity: 0.6; font-size: 14px;">안녕하세요
-												이번에 가본곳은..</td>
-										<td align="right"><b>2022-04-22</b></td>
-									</tr>
-									<tr height="40px">
-										<td><b>경복궁</b></td>
-										<td><b style="opacity: 0.6; font-size: 14px;">안녕하세요
-												이번에 가본곳은..</td>
-										<td align="right"><b>2022-04-22</b></td>
-									</tr>
-									<tr height="40px">
-										<td><b>흥인지문</b></td>
-										<td><b style="opacity: 0.6; font-size: 14px;">안녕하세요
-												이번에 가본곳은..</td>
-										<td align="right"><b>2022-04-22</b></td>
-									</tr>
-									<tr height="40px">
-										<td><b>월드컵경기장</b></td>
-										<td><b style="opacity: 0.6; font-size: 14px;">안녕하세요
-												이번에 가본곳은..</td>
-										<td align="right"><b>2022-04-22</b></td>
-									</tr>
-									<tr height="40px">
-										<td><b>독립기념관</b></td>
-										<td><b style="opacity: 0.6; font-size: 14px;">안녕하세요
-												이번에 가본곳은..</td>
-										<td align="right"><b>2022-04-22</b></td>
-									</tr>
-									<tr height="20px">
-										<td colspan="3"><div class="myline"></div></td>
-									</tr>
-									<tr>
-										<td height="20px" colspan="3">
-											<div>
-												<ul style="justify-content: center; padding-top: 25px;"
-													class="pagination">
-													<!-- 1페이지로 이동처리 -->
-
-
-													<c:url var="blf" value="/----.do">
-														<c:param name="page" value="1" />
-													</c:url>
-													<li class="page-item"><a class="page-link"
-														href="${ blf }"><i class="bi bi-chevron-double-left"></i></a></li>
-
-													<!--  이전페이지 그룹으로 이동처리  -->
-
-													<c:url var="blf2" value="/boardlist.do">
-														<c:param name="page" value="${ startPage - 10 }" />
-													</c:url>
-													<li class="page-item"><a class="page-link"
-														href="${ blf2 }"><i class="bi bi-chevron-left"></i></a></li>
-
-													<!-- 현재 페이지가 속한 페이지 그룹 출력 -->
-													<li class="page-item active"><a class="page-link"
-														href="#">1</a></li>
-													<li class="page-item"><a class="page-link"
-														href="${ blf5 }">2</a></li>
-													<li class="page-item"><a class="page-link"
-														href="${ blf5 }">3</a></li>
-
-													<!--  다음페이지 그룹으로 이동처리  -->
-
-													<c:url var="blf3" value="/----.do">
-														<c:param name="page" value="${ endPage + 10 }" />
-													</c:url>
-													<li class="page-item"><a class="page-link"
-														href="${ blf3 }"><i class="bi bi-chevron-right"></i></a></li>
-
-
-													<!-- 끝페이지로 이동처리 -->
-
-													<c:url var="blf4" value="-----.do">
-														<c:param name="page" value="${ maxPage }" />
-													</c:url>
-													<li class="page-item"><a class="page-link"
-														href="${ blf4 }"><i class="bi bi-chevron-double-right"></i></a>
-												</ul>
-											</div>
-										</td>
-									</tr>
-								</table>
-							</div>
-						</div>
-					</div> --%>
-
+					</div>					
 					<!--  -------------------------------------------------------------------- -->
 					<div class="col-lg-12 col-md-12 wow fadeInUp" data-wow-delay="0.1s">
 						<div class="team-item rounded overflow-hidden">
@@ -321,16 +318,16 @@ img.photo {
 											<div class="col-lg-4 col-md-6 wow fadeInUp"
 												data-wow-delay="0.1s">
 												<div class="property-item rounded overflow-hidden"
-													style="box-shadow: 3px 4px 12px 3px gray;width:360px; height:300px;">
+													style="box-shadow: 3px 4px 12px 3px gray;width:390px; height:300px;">
 													<div class="position-relative">
 														<a class="detail" role="button" style="overflow: hidden; margin: 0 auto;"><img
-															style="width: 360px; height: 300px; object-fit: cover;" 
+															style="width: 390px; height: 300px; object-fit: cover;" 
 															src="${ pageContext.servletContext.contextPath }/resources/galleryimg/${ g.photo_path }"
 															alt=""></a>
 														<div class="m-2 py-1 px-2"
 															style="position: absolute; bottom: 38%; right: 35%;">
 															<b
-																style="color: white; text-shadow: 1px 1px 6px black; cursor: pointer">${ g.hashtag }</b>
+																style="color: white; text-shadow: 1px 1px 6px black; cursor: pointer;">${ g.hashtag }</b>
 														</div>
 													</div>
 												</div>
@@ -442,7 +439,7 @@ img.photo {
 									<c:forEach items="${ requestScope.likelist }" var="b"
 										varStatus="status">
 										<div class="testimonial-item rounded p-2"
-											style="width: 95%; height: 310px; box-shadow: 3px 4px 11px 3px gray; margin:12px 3px 15px 3px;">
+											style="width: 95%; height: 310px; box-shadow: 3px 4px 11px 3px #C3C3C3; margin:12px 3px 15px 3px;">
 											<div>
 												<table class="p-1" style="margin:5px">
 													<tr>
@@ -509,7 +506,7 @@ img.photo {
 										<div style="padding: 30px;" align="center">
 											<form action="searchHash.do" method="get">
 												<div class="search">
-													<input type="text" size="30"
+													<input id="searchtag" type="text" size="30"
 														placeholder="search hashtag..."
 														onfocus="this.placeholder=''"
 														onblur="this.placeholder='search hashtag...'"
@@ -546,5 +543,7 @@ img.photo {
 	</div>
 
 	<c:import url="/WEB-INF/views/parts/foot.jsp" />
+	
 </body>
+
 </html>

@@ -19,7 +19,7 @@ public interface UserService {
 	//마이페이지 이동시 내가 스크랩한 게시물 가져오기
 	//ArrayList<Gallery> myScrap(int user_no);
 	
-	User selectUser(int user_no);
+	User selectUserInfo(int user_no);
 	
 	int boardCount(int user_no);
 	
@@ -28,5 +28,7 @@ public interface UserService {
 	ArrayList<Gallery> selectScrapList(int user_no);
 
 	ArrayList<Gallery> selectMygallery(Map<String, Object> map);
+
+	int updateUser(User user);
 
 }

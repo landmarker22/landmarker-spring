@@ -15,7 +15,7 @@
 		
 	</resultMap>
 
-	<select id="selectUser" parameterType="int" resultType="User">
+	<select id="selectUserInfo" parameterType="int" resultType="User">
 		select * from l_user
 		where user_no = #{ user_no }
 	</select>
@@ -87,7 +87,11 @@
 		where num >= ${startRow} and num <= ${endRow}
 		]]>
 	</select> 
-	
+	<select id="updateUser" parameterType="User">
+		update l_user
+		set user_name = #{ user_name }		
+		where user_no = #{ user_no }
+	</select>
 	
 	 
 </mapper>

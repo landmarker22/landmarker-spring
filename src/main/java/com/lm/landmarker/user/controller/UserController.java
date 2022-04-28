@@ -28,30 +28,6 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	/*@RequestMapping("mypage.do")
-	public ModelAndView myInfoMethod(HttpServletRequest request, ModelAndView mv) {
-		HttpSession session = request.getSession();
-
-		//User user = (User)session.getAttribute("loginUser");
-		
-		//내가올린 게시물 가져오기
-		//ArrayList<Gallery> myboard = userService.myGallery(user.getUser_no());
-		//스크랩한 게시물 가져오기
-		//ArrayList<Gallery> myscrap = userService.myScrap(user.getUser_no());
-		
-		System.out.println("여기는 mypage.do, mygallert 테스트" + myboard);
-		System.out.println("여기는 mypage.do, myscrap 테스트" + myscrap);
-		
-		if(user != null) {
-			mv.addObject("user", user);
-			mv.addObject("blist", blist);
-			mv.addObject("tlist", tlist);
-			mv.setViewName("user/myPage");
-		}
-		
-		return mv;
-	}*/
-	
 	// 테스트 함수 --------------------------------
 	@RequestMapping("mypage.do")
 	public ModelAndView myInfoMethod(ModelAndView mv, @RequestParam(name = "page", required = false) String page) {
@@ -60,7 +36,7 @@ public class UserController {
 		
 		int user_no=1;//테스트 유저번호(홍길동)
 		
-		User user = userService.selectUser(user_no);
+		User user = userService.selectUserInfo(user_no);
 		//유저객체 가져옴
 	
 		int board_count = userService.boardCount(user_no);
@@ -121,4 +97,27 @@ public class UserController {
 		
 		return mv;
 	}
+	@RequestMapping("userupdate.do")
+	public String UpdateUser(HttpServletRequest request, @RequestParam(name="username",required = false) String user_name) {
+		
+//		HttpSession session = request.getSession();
+//		User user = (User)session.getAttribute("loginUser");
+		
+		int user_no=1;//테스트 유저번호(홍길동)
+		
+		User user = userService.selectUserInfo(user_no);
+		//유저객체 가져옴
+		
+		if(user_name != null && user_name != "") {
+		user.setUser_name(user_name);
+		}
+		
+		if(userService.updateUser(user) > 0) {
+			return "redirect:mypage.do";//???
+		}else {
+			System.out.println("닉네임 변경 실패");
+			return "user/myPage";
+		}
+	}
+	
 }

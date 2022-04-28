@@ -17,8 +17,8 @@ public class UserServiceImpl implements UserService{
 	private UserDao userDao;
 	
 	@Override
-	public User selectUser(int user_no) {		
-		return userDao.selectUser(user_no);
+	public User selectUserInfo(int user_no) {		
+		return userDao.selectUserInfo(user_no);
 	}
 
 	@Override
@@ -40,6 +40,11 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public ArrayList<Gallery> selectMygallery(Map<String, Object> map) {	
 		return userDao.selectMygallery(map);
+	}
+
+	@Override
+	public int updateUser(User user) {
+		return userDao.updateUser(user);
 	}
 
 }
