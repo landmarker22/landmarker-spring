@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 <script>
 /* $(function() { 
 	$(".nl").click(function(){
@@ -21,7 +22,7 @@ $(function(){
 	$("#aa").click(function(){
 		console.log("성공");
 		$.ajax({
-			url:"naverLogin.do",
+			url:"login.do",
 			type: "POST",
 			data: new FormData($("#test")[0]),
 			dataType: "json",
@@ -32,8 +33,8 @@ $(function(){
 			success: function(result){
 				console.log(result);
 				values = "<a href='https://kauth.kakao.com/oauth/authorize?client_id=53ae3074ebb4e336e3b34b90ab5d2f8c&redirect_uri=http://localhost:8888/landmarker/kakaoLogin.do&response_type=code' class='bt'><img src='${ pageContext.servletContext.contextPath }/resources/userImages/kakao(eng).png'></a><br>"
-						+ "<a href='" + result.url + "'><img src='${ pageContext.servletContext.contextPath }/resources/userImages/naver(eng).png'></a><br>"
-						+ "<a href='googleLogin.do' class='bt'><img src='${ pageContext.servletContext.contextPath }/resources/userImages/google.png'></a>"
+						+ "<a href='" + result.naverUrl + "'><img src='${ pageContext.servletContext.contextPath }/resources/userImages/naver(eng).png'></a><br>"
+						/* +"<a href='" + result.googleUrl + "'><img src='${ pageContext.servletContext.contextPath }/resources/userImages/google.png'></a>" */
 						+ "<br> <br>"
 				$("#modal-body").html(values);
 			},

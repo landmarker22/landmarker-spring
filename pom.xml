@@ -307,7 +307,13 @@
 
 		<!-- 네이버, 카카오로그인 끝=========================================================================================== -->
 		
-
+		<!-- google -->
+				<dependency>
+		  <groupId>org.springframework.social</groupId>
+		  <artifactId>spring-social-google</artifactId>
+		  <version>1.0.0.RELEASE</version>
+		</dependency>
+		
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
