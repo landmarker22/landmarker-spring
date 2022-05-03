@@ -30,17 +30,21 @@ public class UserController {
 	
 	// 테스트 함수 --------------------------------
 	@RequestMapping("mypage.do")
-	public ModelAndView myInfoMethod(ModelAndView mv, @RequestParam(name = "page", required = false) String page) {
+	public ModelAndView myInfoMethod(HttpServletRequest request, ModelAndView mv, @RequestParam(name = "page", required = false) String page) {
 		
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("loginUser");
 		//리퀘스트로 세션에서 아이디 값 가져오게 수정해서 적용해야함
+		System.out.println(user+"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		
-		int user_no=1;//테스트 유저번호(홍길동)
+		//int user_no=1;//테스트 유저번호(홍길동)
 		
-		User user = userService.selectUserInfo(user_no);
+		//User user = userService.selectUserInfo(user_no);
 		//유저객체 가져옴
-	
+		int user_no=user.getUser_no();
 		int board_count = userService.boardCount(user_no);
 		int scrap_count =  userService.scrapCount(user_no);
+		int reply_count = userService.replyCount(user_no);
 		
 		//-------------------------페이징처리한 올린 게시물 가져오기--------
 		int currentPage = 1;
@@ -91,6 +95,7 @@ public class UserController {
 			mv.addObject("likelist", likelist);
 			mv.addObject("board_count", board_count);
 			mv.addObject("scrap_count", scrap_count);
+			mv.addObject("reply_count", reply_count);
 			mv.addObject("user", user);
 			mv.setViewName("user/mypage");
 		}
@@ -100,13 +105,10 @@ public class UserController {
 	@RequestMapping("userupdate.do")
 	public String UpdateUser(HttpServletRequest request, @RequestParam(name="username",required = false) String user_name) {
 		
-//		HttpSession session = request.getSession();
-//		User user = (User)session.getAttribute("loginUser");
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("loginUser");
 		
-		int user_no=1;//테스트 유저번호(홍길동)
 		
-		User user = userService.selectUserInfo(user_no);
-		//유저객체 가져옴
 		
 		if(user_name != null && user_name != "") {
 		user.setUser_name(user_name);
@@ -116,6 +118,26 @@ public class UserController {
 			return "redirect:mypage.do";//???
 		}else {
 			System.out.println("닉네임 변경 실패");
+			return "user/myPage";
+		}
+	}
+	
+	@RequestMapping("badgeupdate.do")
+	public String UpdateBadge(HttpServletRequest request, @RequestParam(name="badge_name") String badge_name) {
+		
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("loginUser");
+		
+		
+		
+		
+		user.setUser_badge(badge_name);
+		
+		
+		if(userService.updateBadge(user) > 0) {
+			return "redirect:mypage.do";
+		}else {
+			System.out.println("벳지 변경 실패");
 			return "user/myPage";
 		}
 	}

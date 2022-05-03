@@ -140,7 +140,7 @@ public class LoginController {
 			User user) throws Exception {
 		String access_Token = ms.getAccessToken(code);
 		HashMap<String, Object> userInfo = ms.getUserInfo(access_Token);
-		session.setAttribute("loginUser", user);
+		
 		System.out.println(access_Token);
 
 		String email = (String) userInfo.get("email");
@@ -160,7 +160,7 @@ public class LoginController {
 		}
 
 		user = userService.selectUser(email);
-
+		session.setAttribute("loginUser", user);
 		return "common/main";
 	}
 

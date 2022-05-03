@@ -54,8 +54,15 @@ public class UserDao {
 		return (ArrayList<Gallery>)list;
 	}
 
-	public int updateUser(User user) {
-		// TODO Auto-generated method stub
+	public int updateUser(User user) {	
 		return session.update("userMapper.updateUser", user);
+	}
+
+	public int updateBadge(User user) {
+		return session.update("userMapper.updateBadge", user);
+	}
+
+	public int replyCount(int user_no) {		
+		return session.selectOne("userMapper.replyCount", user_no);
 	}
 }

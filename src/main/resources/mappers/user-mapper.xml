@@ -20,7 +20,7 @@
 	</select>
 	
 	<insert id="insertUser" parameterType="User">
-		insert into l_user values(T_UN_S.nextval, #{ user_email }, #{ user_name }, #{ user_badge , jdbcType = VARCHAR} , default, default, default)
+		insert into l_user values(L_UN_S.nextval, #{ user_email }, #{ user_name }, #{ user_badge , jdbcType = VARCHAR} , default, default, default)
 	</insert>
 	
 	<select id="selectUser" parameterType="String" resultType="User">
@@ -43,6 +43,11 @@
 	<select id="likeCount" parameterType="int" resultType="_int">
 		<![CDATA[
 		SELECT COUNT(*) FROM L_LIKE WHERE USER_NO = #{user_no}
+		]]>
+	</select>
+	<select id="replyCount" parameterType="int" resultType="_int">
+		<![CDATA[
+		SELECT COUNT(*) FROM L_COMMENT WHERE USER_NO = #{user_no}
 		]]>
 	</select>
 	
@@ -106,4 +111,10 @@
 		set user_name = #{ user_name }		
 		where user_no = #{ user_no }
 	</select>
+	<select id="updateBadge" parameterType="User">
+		update l_user
+		set user_badge = #{ user_badge }		
+		where user_no = #{ user_no }
+	</select>
+	
 </mapper>

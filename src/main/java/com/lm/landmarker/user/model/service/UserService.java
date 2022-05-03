@@ -31,4 +31,8 @@ public interface UserService {
 
 	int updateUser(User user);
 
+	int updateBadge(User user);
+
+	int replyCount(int user_no);
+
 }

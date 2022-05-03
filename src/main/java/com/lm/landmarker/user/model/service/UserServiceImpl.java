@@ -62,4 +62,16 @@ public class UserServiceImpl implements UserService {
 	public ArrayList<Gallery> selectMygallery(Map<String, Object> map) {	
 		return userDao.selectMygallery(map);
 	}
+
+	@Override
+	public int updateBadge(User user) {
+		// TODO Auto-generated method stub
+		return userDao.updateBadge(user);
+	}
+
+	@Override
+	public int replyCount(int user_no) {
+		// TODO Auto-generated method stub
+		return userDao.replyCount(user_no);
+	}
 }
