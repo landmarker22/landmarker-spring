@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.lm.landmarker.user.model.vo.User;
 import com.lm.landmarker.gallery.model.vo.Gallery;
-import com.lm.landmarker.user.model.vo.User;
+import com.lm.landmarker.landmark.model.vo.Landmark;
 
 @Repository("userDao")
 public class UserDao {
@@ -64,5 +64,10 @@ public class UserDao {
 
 	public int replyCount(int user_no) {		
 		return session.selectOne("userMapper.replyCount", user_no);
+	}
+
+	public ArrayList<Landmark> landmarkSearch(String search) {
+		List<Landmark> list = session.selectList("userMapper.landmarkSearch", search);
+		return (ArrayList<Landmark>)list;
 	}
 }

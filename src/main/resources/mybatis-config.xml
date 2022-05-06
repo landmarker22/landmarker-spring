@@ -11,6 +11,7 @@
 	<typeAliases>
 		<typeAlias type="com.lm.landmarker.user.model.vo.User" alias="User" />
 		<typeAlias type="com.lm.landmarker.gallery.model.vo.Gallery" alias="Gallery" />
+		<typeAlias type="com.lm.landmarker.landmark.model.vo.Landmark" alias="Landmark" />
 		<!-- <typeAlias type="com.lm.landmarker.comment.model.vo.Category" alias="Comment" /> -->
 		<!-- <typeAlias type="com.lm.landmarker.like.model.vo.Notice" alias="Like" /> -->
 		<!-- <typeAlias type="com.lm.landmarker.landmark.model.vo.Board" alias="Landmark" /> -->

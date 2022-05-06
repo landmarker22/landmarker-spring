@@ -1,23 +1,30 @@
 package com.lm.landmarker.user.controller;
 
-import java.sql.Date;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.lm.landmarker.common.Paging;
+
 import com.lm.landmarker.gallery.model.vo.Gallery;
+import com.lm.landmarker.landmark.model.vo.Landmark;
 import com.lm.landmarker.user.model.service.UserService;
 import com.lm.landmarker.user.model.vo.User;
 
@@ -53,7 +60,7 @@ public class UserController {
 		}
 		
 		// 페이징 계산 처리 ----- 별도의 클래스로 작성해서 사용해도 됨 -----
-		int limit = 6; // 한 페이지에 출력할 목록 갯수
+		int limit = 3; // 한 페이지에 출력할 목록 갯수
 		// 페이지 수 계산을 위해 총 목록갯수 조회
 		int listCount = userService.boardCount(user_no);
 		// 페이지 수 계산
@@ -140,6 +147,32 @@ public class UserController {
 			System.out.println("벳지 변경 실패");
 			return "user/myPage";
 		}
+	}
+	
+	@RequestMapping(value="landmarkSearch.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String LandmarkSearch(@RequestParam(name="search") String search, HttpServletResponse response) throws UnsupportedEncodingException {
+		
+		ArrayList<Landmark> list = userService.landmarkSearch(search);
+		
+		JSONObject sendJson = new JSONObject();
+		
+		JSONArray jarr = new JSONArray();
+		
+		for(Landmark landmark : list) {
+			JSONObject job = new JSONObject();
+			
+			job.put("landmark_name", URLEncoder.encode(landmark.getLandmark_name(), "utf-8"));
+			job.put("landmark_address", URLEncoder.encode(landmark.getLandmark_address(), "utf-8"));
+			
+			jarr.add(job);  
+		}
+		sendJson.put("list", jarr);
+		
+		
+		return sendJson.toJSONString();
+		
+		
 	}
 	
 }

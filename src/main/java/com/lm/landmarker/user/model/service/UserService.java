@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import com.lm.landmarker.gallery.model.vo.Gallery;
+import com.lm.landmarker.landmark.model.vo.Landmark;
 import com.lm.landmarker.user.model.vo.User;
 
 public interface UserService {
@@ -34,5 +35,7 @@ public interface UserService {
 	int updateBadge(User user);
 
 	int replyCount(int user_no);
+
+	ArrayList<Landmark> landmarkSearch(String search);
 
 }

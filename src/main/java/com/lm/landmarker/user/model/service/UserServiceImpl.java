@@ -1,13 +1,13 @@
 package com.lm.landmarker.user.model.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lm.landmarker.gallery.model.vo.Gallery;
+import com.lm.landmarker.landmark.model.vo.Landmark;
 import com.lm.landmarker.user.model.dao.UserDao;
 import com.lm.landmarker.user.model.vo.User;
 
@@ -71,7 +71,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int replyCount(int user_no) {
-		// TODO Auto-generated method stub
 		return userDao.replyCount(user_no);
+	}
+
+	@Override
+	public ArrayList<Landmark> landmarkSearch(String search) {
+		return userDao.landmarkSearch(search);
 	}
 }
