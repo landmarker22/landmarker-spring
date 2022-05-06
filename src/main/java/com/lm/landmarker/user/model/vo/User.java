@@ -81,11 +81,11 @@ public class User implements java.io.Serializable{
 		this.login_ok = login_ok;
 	}
 
-	public String getAdmin() {
+	public String getUser_admin() {
 		return user_admin;
 	}
 
-	public void setAdmin(String user_admin) {
+	public void setUser_admin(String user_admin) {
 		this.user_admin = user_admin;
 	}
 
