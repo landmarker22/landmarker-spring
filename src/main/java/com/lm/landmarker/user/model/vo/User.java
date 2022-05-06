@@ -85,8 +85,8 @@ public class User implements java.io.Serializable{
 		return user_admin;
 	}
 
-	public void setAdmin(String admin) {
-		this.user_admin = admin;
+	public void setAdmin(String user_admin) {
+		this.user_admin = user_admin;
 	}
 
 	public Date getUser_date() {

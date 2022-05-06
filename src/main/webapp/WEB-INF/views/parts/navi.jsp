@@ -96,12 +96,14 @@ hr {
                 </div>
                 <a href="contact.do" class="nav-item nav-link">Contact</a>
                 <c:if test="${ empty sessionScope.loginUser }">
-                <a href="#" class="nav-item nav-link" id="aa" data-bs-toggle="modal" data-bs-target="#exampleModal">login</a>
+                	<a href="#" class="nav-item nav-link" id="aa" data-bs-toggle="modal" data-bs-target="#exampleModal">login</a>
                 </c:if>
                 <c:if test="${ !empty sessionScope.loginUser }">
-                <a href="logout.do" class="nav-item nav-link" >logout</a>
-                <a href="mypage.do" class="nav-item nav-link">Mytest</a>               
-                <a href="admin.do" class="nav-item nav-link">Admin</a>
+	                <a href="mypage.do" class="nav-item nav-link">Mytest</a>
+<%-- 	                <c:if test="${ loginUser.user_admin eq 'Y' }">
+	                	<a href="admin.do" class="nav-item nav-link">Admin</a>
+                	</c:if> --%>
+	                <a href="logout.do" class="nav-item nav-link" >logout</a>
                 </c:if>
             </div>
             <a href="" class="btn btn-primary px-3 d-none d-lg-flex">사진으로 랜드마크 검색</a>

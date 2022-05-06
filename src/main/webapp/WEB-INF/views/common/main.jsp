@@ -102,7 +102,7 @@
 	                    <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
 	                </div> -->
 	                <div class="tab-content">
-	                    <div id="tab-1" class="tab-pane fade show p-0">
+	                    <div id="tab-1" class="tab-pane fade show p-0 active">
 	                        <div class="row g-4">
 	                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
 	                                <div class="property-item rounded overflow-hidden">
