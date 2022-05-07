@@ -37,5 +37,14 @@ public interface UserService {
 	int replyCount(int user_no);
 
 	ArrayList<Landmark> landmarkSearch(String search);
-
+	
+	
+	// 장고 로그인
+	int insertLink(Map<String, String> map);
+	
+	int deleteKey(String link_key);
+	
+	int deleteDate();
+	
+	int selectLink(String link_key);
 }

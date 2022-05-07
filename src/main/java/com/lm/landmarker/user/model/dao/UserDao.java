@@ -70,4 +70,22 @@ public class UserDao {
 		List<Landmark> list = session.selectList("userMapper.landmarkSearch", search);
 		return (ArrayList<Landmark>)list;
 	}
+	
+	
+	// 장고 로그인
+	public int insertLink(Map<String, String> map) {		
+		return session.insert("userMapper.insertLink", map);
+	}
+	
+	public int deleteKey(String link_key) {		
+		return session.delete("userMapper.deleteKey", link_key);
+	}
+	
+	public int deleteDate() {		
+		return session.delete("userMapper.deleteDate");
+	}
+	
+	public int selectLink(String link_key) {		
+		return session.selectOne("userMapper.selectLink", link_key);
+	}
 }

@@ -13,9 +13,6 @@
 		<result property="login_ok" column="login_ok" />
 	</resultMap>
 	
-	
-	
-	
 	<select id="dupCheck" parameterType="String" resultType="User">
 		select *
 		from l_user
@@ -106,6 +103,30 @@
 		update l_user
 		set user_badge = #{ user_badge }		
 		where user_no = #{ user_no }
+	</select>
+	
+	
+	<!-- 장고 로그인 -->
+	<insert id="insertLink" parameterType="HashMap">
+		INSERT INTO L_LINK 
+		VALUES(#{ USER_NO }, #{ LINK_KEY }, DEFAULT)
+	</insert>
+	
+	<delete id="deleteKey">
+		DELETE FROM L_LINK 
+		WHERE LINK_KEY = #{ LINK_KEY }
+	</delete>
+	
+	<delete id="deleteDate" parameterType="String">
+		DELETE FROM L_LINK 
+		WHERE LINK_DATE NOT BETWEEN (SYSDATE - 5/24/60) AND SYSDATE
+	</delete>
+	
+	<select id="selectLink" parameterType="String">
+		SELECT COUNT(*)
+		FROM L_LINK
+		WHERE LINK_KEY = #{ LINK_KEY } AND
+              LINK_DATE BETWEEN (SYSDATE - 5/24/60) AND SYSDATE
 	</select>
 	
 </mapper>

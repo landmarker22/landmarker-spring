@@ -2,36 +2,28 @@ package com.lm.landmarker.user.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.social.connect.Connection;
-import org.springframework.social.google.api.Google;
-import org.springframework.social.google.api.impl.GoogleTemplate;
-import org.springframework.social.google.api.plus.Person;
-import org.springframework.social.google.api.plus.PlusOperations;
-import org.springframework.social.google.connect.GoogleConnectionFactory;
-import org.springframework.social.oauth2.AccessGrant;
-import org.springframework.social.oauth2.GrantType;
-import org.springframework.social.oauth2.OAuth2Operations;
-import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.lm.landmarker.user.model.service.KakaoService;
 import com.lm.landmarker.user.model.service.UserService;
 import com.lm.landmarker.user.model.vo.User;
 
+@CrossOrigin(origins = "http://localhost:8080")
 @Controller
 public class LoginController {
 
@@ -56,8 +48,7 @@ public class LoginController {
 	 */
 
 	// 로그인 첫 화면 요청 메소드
-	@RequestMapping(value = "login.do", method = RequestMethod.POST)
-	@ResponseBody
+	@RequestMapping(value = "naverlogin.do")
 	public String login(Model model, HttpSession session) {
 
 		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
@@ -83,11 +74,12 @@ public class LoginController {
 
 		System.out.println(url);
 
-//        model.addAttribute("url", naverAuthUrl);        
+		model.addAttribute("url", naverAuthUrl);        
 		/* 생성한 인증 URL을 View로 전달 */
-		return url.toJSONString();
+		return "user/connect";
 	}
-
+	
+	
 	// 네이버 로그인 성공시 callback호출 메소드
 	@RequestMapping(value = "naverCallback.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session,
@@ -123,12 +115,21 @@ public class LoginController {
 
 			}
 		}
+		
 		user = userService.selectUser(email);
-		System.out.println(user.toString());
-
 		session.setAttribute("loginUser", user);
-		/* 네이버 로그인 성공 페이지 View 호출 */
-		return "common/main";
+
+		Map<String, String> map = new HashMap<>();
+		map.put("USER_NO", String.valueOf(user.getUser_no()));
+		map.put("LINK_KEY", RandomStringUtils.randomAlphanumeric(50));
+		
+		System.out.println(map.get("LINK_KEY"));
+		
+		int dd = userService.insertLink(map);
+		
+		System.out.println(dd);
+		
+		return "redirect:http://localhost:8080/landmarker/login.do?link_key=" + map.get("LINK_KEY");
 	}
 
 	// 카카오 로그인
@@ -161,7 +162,16 @@ public class LoginController {
 
 		user = userService.selectUser(email);
 		session.setAttribute("loginUser", user);
-		return "common/main";
+		
+		Map<String, String> map = new HashMap<>();
+		map.put("USER_NO", String.valueOf(user.getUser_no()));
+		map.put("LINK_KEY", RandomStringUtils.randomAlphanumeric(50));
+		
+		System.out.println(map.get("LINK_KEY"));
+		
+		userService.insertLink(map);
+		
+		return "redirect:http://localhost:8080/landmarker/login.do?link_key=" + map.get("LINK_KEY");
 	}
 
 	/*
@@ -209,6 +219,6 @@ public class LoginController {
 		System.out.println("logout");
 		session.invalidate();
 
-		return "common/main";
+		return "redirect:/";
 	}
 }

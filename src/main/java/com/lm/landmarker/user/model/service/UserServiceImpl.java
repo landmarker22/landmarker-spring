@@ -78,4 +78,26 @@ public class UserServiceImpl implements UserService {
 	public ArrayList<Landmark> landmarkSearch(String search) {
 		return userDao.landmarkSearch(search);
 	}
+
+	
+	// 장고 로그인
+	@Override
+	public int insertLink(Map<String, String> map) {
+		return userDao.insertLink(map);
+	}
+
+	@Override
+	public int deleteKey(String link_key) {
+		return userDao.deleteKey(link_key);
+	}
+
+	@Override
+	public int deleteDate() {
+		return userDao.deleteDate();
+	}
+
+	@Override
+	public int selectLink(String link_key) {
+		return userDao.selectLink(link_key);
+	}
 }
