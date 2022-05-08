@@ -45,7 +45,7 @@ hr {
  	                <c:if test="${ loginUser.user_admin eq 'Y' }">
 	                	<a href="admin.do" class="nav-item nav-link">Admin</a>
                 	</c:if>
-	                <a href="logout.do" class="nav-item nav-link" >logout</a>
+	                <a href="http://localhost:8080/landmarker/logout.do" class="nav-item nav-link" >logout</a>
                 </c:if>
             </div>
             <a href="http://localhost:8080/landmarker/photoSearch.do" class="btn btn-primary px-3 d-none d-lg-flex">사진으로 랜드마크 검색</a>

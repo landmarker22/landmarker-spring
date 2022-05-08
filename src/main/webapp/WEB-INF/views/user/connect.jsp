@@ -4,6 +4,6 @@
 <script type="text/javascript">
 $(document).ready(function(){
 		location.href="${ url }";
-		alert("${ url }");
+		//alert("${ url }");
 	})
 </script>
