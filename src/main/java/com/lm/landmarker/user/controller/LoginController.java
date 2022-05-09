@@ -1,6 +1,7 @@
 package com.lm.landmarker.user.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.lm.landmarker.banner.model.vo.Banner;
 import com.lm.landmarker.user.model.service.KakaoService;
 import com.lm.landmarker.user.model.service.UserService;
 import com.lm.landmarker.user.model.vo.User;
@@ -125,7 +127,8 @@ public class LoginController {
 		}
 		user = userService.selectUser(email);
 		System.out.println(user.toString());
-
+		ArrayList<Banner> banner= userService.bannerList();		
+		model.addAttribute("banner", banner );
 		session.setAttribute("loginUser", user);
 		/* 네이버 로그인 성공 페이지 View 호출 */
 		return "common/main";
@@ -136,7 +139,7 @@ public class LoginController {
 	private KakaoService ms;
 
 	@RequestMapping(value = "/kakaoLogin.do", method = RequestMethod.GET)
-	public String kakaoLogin(@RequestParam(value = "code", required = false) String code, HttpSession session,
+	public String kakaoLogin(Model model,@RequestParam(value = "code", required = false) String code, HttpSession session,
 			User user) throws Exception {
 		String access_Token = ms.getAccessToken(code);
 		HashMap<String, Object> userInfo = ms.getUserInfo(access_Token);
@@ -158,9 +161,11 @@ public class LoginController {
 			}
 
 		}
-
+		ArrayList<Banner> banner= userService.bannerList();		
+		model.addAttribute("banner", banner );
 		user = userService.selectUser(email);
 		session.setAttribute("loginUser", user);
+		
 		return "common/main";
 	}
 
@@ -208,7 +213,10 @@ public class LoginController {
 	public String logout(HttpSession session, Model model) throws IOException {
 		System.out.println("logout");
 		session.invalidate();
-
+		
+		ArrayList<Banner> banner= userService.bannerList();		
+		model.addAttribute("banner", banner );
+		
 		return "common/main";
 	}
 }

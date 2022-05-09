@@ -1,7 +1,9 @@
 package com.lm.landmarker.user.controller;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,13 +18,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import com.lm.landmarker.banner.model.vo.Banner;
 import com.lm.landmarker.gallery.model.vo.Gallery;
 import com.lm.landmarker.landmark.model.vo.Landmark;
 import com.lm.landmarker.user.model.service.UserService;
@@ -42,12 +46,6 @@ public class UserController {
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("loginUser");
 		//리퀘스트로 세션에서 아이디 값 가져오게 수정해서 적용해야함
-		System.out.println(user+"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		
-		//int user_no=1;//테스트 유저번호(홍길동)
-		
-		//User user = userService.selectUserInfo(user_no);
-		//유저객체 가져옴
 		int user_no=user.getUser_no();
 		int board_count = userService.boardCount(user_no);
 		int scrap_count =  userService.scrapCount(user_no);
@@ -135,11 +133,7 @@ public class UserController {
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("loginUser");
 		
-		
-		
-		
 		user.setUser_badge(badge_name);
-		
 		
 		if(userService.updateBadge(user) > 0) {
 			return "redirect:mypage.do";
@@ -174,5 +168,142 @@ public class UserController {
 		
 		
 	}
+	@RequestMapping(value = "admin.do", method = RequestMethod.GET)
+	public ModelAndView admin(ModelAndView mv) {
+		ArrayList<User> list = userService.userList();
+		ArrayList<Banner> banner= userService.bannerList();
+
+		if (list != null && list.size() > 0) {
+			mv.addObject("list", list);
+			mv.addObject("banner", banner);
+			mv.setViewName("user/adminpage");
+		} else {
+			mv.addObject("message","유저 목록 조회 실패");
+			mv.setViewName("user/adminpage");
+		}
+		return mv;
+	}
+	
+	@RequestMapping("bannerDelete.do")
+	public String BannerDelete(@RequestParam(name="banner_no") int banner_no) {
+		
+		if(userService.bannerDelete(banner_no) > 0) {
+			return "redirect:admin.do";
+		}else {
+			System.out.println("베너삭제 실패");
+			return "redirect:admin.do";
+		}
+	}
+	
+	@RequestMapping(value="insertBanner.do", method=RequestMethod.POST)
+	public String InsertBanner(@RequestParam(name="title") String title, 
+			@RequestParam(name="content") String content,
+			@RequestParam(name="file") MultipartFile file,
+			HttpServletRequest request, Model model, Banner banner) {
+		
+		String savePath = request.getSession().getServletContext().getRealPath("resources/banner");
+		
+		String fileName = file.getOriginalFilename();
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		
+		String renameFileName = sdf.format(new java.sql.Date(System.currentTimeMillis()));
+		
+		renameFileName += "." + fileName.substring(fileName.lastIndexOf(".") + 1);
+		
+		File renameFile = new File(savePath + "\\" + renameFileName);
+		
+		try {
+			file.transferTo(renameFile);
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("message", "베너 인서트 오류");
+			
+			return "common/error";
+		}
+		
+		content.replace("\n", ",<br>");
+		content.replace("\r", ",<br>");
+		content.replace("\r\n", ",<br>");
+		content.replace("\n\r", ",<br>");
+		
+		banner.setPhoto_path(renameFileName);
+		banner.setBanner_title(title);
+		banner.setBanner_content(content);
+		
+		
+		if(userService.insertBanner(banner) > 0) {  
+			return "redirect:admin.do";
+			
+		}else {			
+			return "redirect:admin.do";
+		}
+	
+	}
+	
+	@RequestMapping(value = "searchUserName.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String SearchUserName(@RequestParam(name="user_name") String user_name, HttpServletResponse response) throws UnsupportedEncodingException {
+		
+		ArrayList<User> list = userService.searchName(user_name);
+		JSONObject sendJson = new JSONObject();
+		JSONArray jarr = new JSONArray();
+		
+		for(User user : list) {
+			JSONObject job = new JSONObject();
+			
+			job.put("user_no", user.getUser_no());
+			job.put("user_name", URLEncoder.encode(user.getUser_name(), "utf-8"));
+			job.put("user_email", user.getUser_email());
+			job.put("user_admin", user.getUser_admin());
+			job.put("login_ok", user.getLogin_ok());
+			
+			jarr.add(job);  
+		}
+		sendJson.put("list", jarr);
+		
+		return sendJson.toJSONString();
+	}
+	//로그인 제한/가능 변경 처리용
+	@RequestMapping("loginok.do")
+	public String changeLoginOKMethod(User user, Model model, HttpServletRequest request) {
+		logger.info("loginok.do : " + user.getUser_no() + ", " + user.getLogin_ok());
+		System.out.println(user.toString());
+		if(userService.updateLoginOK(user) > 0) {
+			String referer = request.getHeader("Referer");
+			return "redirect:"+ referer;
+//				return "redirect:manager.do";
+		}else {
+			model.addAttribute("message", "로그인 제한/허용 처리 오류 발생!");
+			return "common/error";
+		}
+		
+	}
+//	@RequestMapping(value="landmarkSearch.do", method=RequestMethod.POST)
+//	@ResponseBody
+//	public String LandmarkSearch(@RequestParam(name="search") String search, HttpServletResponse response) throws UnsupportedEncodingException {
+//		
+//		ArrayList<Landmark> list = userService.landmarkSearch(search);
+//		
+//		JSONObject sendJson = new JSONObject();
+//		
+//		JSONArray jarr = new JSONArray();
+//		
+//		for(Landmark landmark : list) {
+//			JSONObject job = new JSONObject();
+//			
+//			job.put("landmark_name", URLEncoder.encode(landmark.getLandmark_name(), "utf-8"));
+//			job.put("landmark_address", URLEncoder.encode(landmark.getLandmark_address(), "utf-8"));
+//			
+//			jarr.add(job);  
+//		}
+//		sendJson.put("list", jarr);
+//		
+//		
+//		return sendJson.toJSONString();
+//		
+//		
+//	}
+
 	
 }

@@ -536,10 +536,6 @@ img.photo {
 																<span style="position:absolute; bottom:6%; right:7%;padding-left: 8px;font-size: 16px; opacity: 0.8;"><b
 																	style="opacity: 0.5;">${ b.gallery_date }</b></span>	
 															</div>
-															
-															
-															
-															
 																								
 										</div>
 									</c:forEach>
@@ -927,7 +923,7 @@ img.photo {
 													placeholder="검색어를 입력하세요..." onfocus="this.placeholder=''"
 													onblur="this.placeholder='검색어를 입력하세요...'" name="hashtag"  style="padding-left:12px"/>
 												&nbsp;
-												<button id="btn1" class="btn btn-primary" type="submit">search</button>
+												<button id="btn1" class="btn btn-primary" type="submit" style="box-shadow: none;">search</button>
 											</div>
 										</div>
 										<div class="myline"></div>

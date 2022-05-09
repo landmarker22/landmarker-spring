@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lm.landmarker.banner.model.vo.Banner;
 import com.lm.landmarker.gallery.model.vo.Gallery;
 import com.lm.landmarker.landmark.model.vo.Landmark;
 import com.lm.landmarker.user.model.dao.UserDao;
@@ -77,5 +78,35 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public ArrayList<Landmark> landmarkSearch(String search) {
 		return userDao.landmarkSearch(search);
+	}
+
+	@Override
+	public ArrayList<Banner> bannerList() {
+		return userDao.bannerList();
+	}
+
+	@Override
+	public int bannerDelete(int banner_no) {
+		return userDao.bannerDelete(banner_no);
+	}
+
+	@Override
+	public int insertBanner(Banner banner) {
+		return userDao.bannerInsert(banner);
+	}
+
+	@Override
+	public ArrayList<User> searchName(String name) {		
+		return userDao.searchName(name);
+	}
+
+	@Override
+	public ArrayList<User> userList() {
+		return userDao.selectUserList();
+	}
+
+	@Override
+	public int updateLoginOK(User user) {
+		return userDao.updateLoginOK(user);
 	}
 }

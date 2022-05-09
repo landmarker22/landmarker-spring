@@ -79,6 +79,7 @@ hr {
             <div class="navbar-nav ms-auto">
                 <a href="/landmarker/" class="nav-item nav-link active">Home</a>
                 <a href="#" class="nav-item nav-link">Gallery</a>
+                <!-- 
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Property</a>
                     <div class="dropdown-menu rounded-0 m-0">
@@ -93,16 +94,16 @@ hr {
                         <a href="testImonial.do" class="dropdown-item">Testimonial</a>
                         <a href="error404.do" class="dropdown-item">404 Error</a>
                     </div>
-                </div>
-                <a href="contact.do" class="nav-item nav-link">Contact</a>
+                </div>  
+                <a href="contact.do" class="nav-item nav-link">Contact</a>-->
                 <c:if test="${ empty sessionScope.loginUser }">
                 	<a href="#" class="nav-item nav-link" id="aa" data-bs-toggle="modal" data-bs-target="#exampleModal">login</a>
                 </c:if>
                 <c:if test="${ !empty sessionScope.loginUser }">
-	                <a href="mypage.do" class="nav-item nav-link">Mytest</a>
-<%-- 	                <c:if test="${ loginUser.user_admin eq 'Y' }">
+	                <a href="mypage.do" class="nav-item nav-link">Mypage</a>
+ 	                <c:if test="${ loginUser.user_admin eq 'Y' }">
 	                	<a href="admin.do" class="nav-item nav-link">Admin</a>
-                	</c:if> --%>
+                	</c:if>
 	                <a href="logout.do" class="nav-item nav-link" >logout</a>
                 </c:if>
             </div>
