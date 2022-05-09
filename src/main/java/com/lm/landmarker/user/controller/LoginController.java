@@ -1,6 +1,7 @@
 package com.lm.landmarker.user.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.lm.landmarker.banner.model.vo.Banner;
 import com.lm.landmarker.user.model.service.KakaoService;
 import com.lm.landmarker.user.model.service.UserService;
 import com.lm.landmarker.user.model.vo.User;
@@ -137,7 +139,7 @@ public class LoginController {
 	private KakaoService ms;
 
 	@RequestMapping(value = "/kakaoLogin.do", method = RequestMethod.GET)
-	public String kakaoLogin(@RequestParam(value = "code", required = false) String code, HttpSession session,
+	public String kakaoLogin(Model model,@RequestParam(value = "code", required = false) String code, HttpSession session,
 			User user) throws Exception {
 		String access_Token = ms.getAccessToken(code);
 		HashMap<String, Object> userInfo = ms.getUserInfo(access_Token);
@@ -159,10 +161,11 @@ public class LoginController {
 			}
 
 		}
-
+		ArrayList<Banner> banner= userService.bannerList();		
+		model.addAttribute("banner", banner );
 		user = userService.selectUser(email);
 		session.setAttribute("loginUser", user);
-		
+
 		Map<String, String> map = new HashMap<>();
 		map.put("USER_NO", String.valueOf(user.getUser_no()));
 		map.put("LINK_KEY", RandomStringUtils.randomAlphanumeric(50));

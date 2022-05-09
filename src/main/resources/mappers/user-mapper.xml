@@ -13,6 +13,18 @@
 		<result property="login_ok" column="login_ok" />
 	</resultMap>
 	
+	 <select id="userList" resultMap="userResultList">
+		<![CDATA[
+			SELECT * FROM L_USER
+		]]>
+	</select> 
+	
+	<select id="nameSearch" parameterType="String" resultMap="userResultList">
+		select *
+		from l_user
+		where user_name = #{ user_name }
+	</select>
+
 	<select id="dupCheck" parameterType="String" resultType="User">
 		select *
 		from l_user
@@ -45,6 +57,28 @@
 		<result column="landmark_name" property="landmark_name" />
 		<result column="landmark_address" property="landmark_address" />		
 	</resultMap>
+	
+	<resultMap type="Banner" id="resultBanner">
+		<id column="banner_no" property="banner_no" />
+		<result column="banner_title" property="banner_title" />
+		<result column="banner_content" property="banner_content" />
+		<result column="photo_path" property="photo_path" />
+		<result column="align" property="align" />	
+	</resultMap>
+	
+	<select id="bannerList" resultMap="resultBanner">
+		<![CDATA[
+		select * from L_BANNER
+		]]>
+	</select>
+	
+	<delete id="bannerDelete" parameterType="int">
+		<![CDATA[
+		delete from L_BANNER WHERE BANNER_NO = #{ banner_no }
+		
+		]]>
+	</delete>
+	
 	
 	<select id="landmarkSearch" parameterType="string" resultMap="resultLandmark">
 		<![CDATA[
@@ -99,12 +133,23 @@
 		set user_name = #{ user_name }		
 		where user_no = #{ user_no }
 	</select>
+	
 	<select id="updateBadge" parameterType="User">
 		update l_user
 		set user_badge = #{ user_badge }		
 		where user_no = #{ user_no }
 	</select>
 	
+	<insert id="bannerInsert" parameterType="Banner">
+		INSERT INTO L_BANNER VALUES(L_BN_S.NEXTVAL, #{ banner_title },#{ banner_content }, #{ photo_path },'L')
+	</insert>
+	
+	<update id="updateLoginOK" parameterType="User">
+		update l_user
+		set	login_ok = #{ login_ok }
+		where user_no = #{ user_no }
+	</update>
+
 	
 	<!-- 장고 로그인 -->
 	<insert id="insertLink" parameterType="HashMap">
@@ -128,5 +173,4 @@
 		WHERE LINK_KEY = #{ LINK_KEY } AND
               LINK_DATE BETWEEN (SYSDATE - 5/24/60) AND SYSDATE
 	</select>
-	
 </mapper>

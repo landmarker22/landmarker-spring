@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.lm.landmarker.user.model.vo.User;
+import com.lm.landmarker.banner.model.vo.Banner;
 import com.lm.landmarker.gallery.model.vo.Gallery;
 import com.lm.landmarker.landmark.model.vo.Landmark;
 
@@ -70,8 +71,36 @@ public class UserDao {
 		List<Landmark> list = session.selectList("userMapper.landmarkSearch", search);
 		return (ArrayList<Landmark>)list;
 	}
-	
-	
+
+	public ArrayList<Banner> bannerList() {
+		List<Banner> list = session.selectList("userMapper.bannerList");
+		return (ArrayList<Banner>)list;
+	}
+
+	public int bannerDelete(int banner_no) {
+		return session.delete("userMapper.bannerDelete", banner_no);
+	}
+
+	public int bannerInsert(Banner banner) {
+
+		return session.insert("userMapper.bannerInsert", banner);
+	}
+
+	public ArrayList<User> selectUserList() {
+		List<User> list = session.selectList("userMapper.userList");
+		return (ArrayList<User>)list;
+	}
+
+	public ArrayList<User> searchName(String user_name) {
+		List<User> list = session.selectList("userMapper.nameSearch", user_name);
+		return (ArrayList<User>)list;
+	}
+
+	public int updateLoginOK(User user) {
+		return session.update("userMapper.updateLoginOK", user);
+	}
+
+		
 	// 장고 로그인
 	public int insertLink(Map<String, String> map) {		
 		return session.insert("userMapper.insertLink", map);

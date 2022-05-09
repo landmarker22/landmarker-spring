@@ -10,8 +10,7 @@
 		<style type="text/css">
 			.img-wrapper {
 			    width: 100%;
-				height: 75vh;
-			    background-image: url("${ pageContext.servletContext.contextPath }/resources/img/carousel-1.jpg");
+				height: 75vh;			    
 			    background-repeat: no-repeat;
 			    background-size: cover;
 			    background-position: center;
@@ -36,29 +35,45 @@
 	        <div class="container-fluid header bg-white p-0">
 		        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
 					<div class="carousel-indicators">
-						<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-						<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-						<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+						<c:forEach items="${ requestScope.banner }" var="b" varStatus="st">
+						<c:if test="${ st.index eq 0 }">
+							<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+						</c:if>
+						<c:if test="${ st.index ne 0 }">
+							<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="${ st.index }" aria-label="Slide ${ st.count }"></button>
+						</c:if>
+						</c:forEach>						
 					</div>
 					<div class="carousel-inner">
-						<div class="carousel-item active img-wrapper">
-							<div class="carousel-caption d-none d-md-block">
-								<h5>First slide label</h5>
-								<p>Some representative placeholder content for the first slide.</p>
+					<!-- -------------------------- -->					
+						<c:forEach items="${ requestScope.banner }" var="b" varStatus="st">
+						<c:if test="${ st.count eq 1 }"> 
+							<div class="carousel-item active img-wrapper" style="background-image: url('${ pageContext.servletContext.contextPath }/resources/banner/${ b.photo_path }');">
+								<div class=" d-md-block" style="position:absolute;bottom:4%; left:3%;text-shadow: 2px 2px 4px black; color:white;">
+									<div class="mb-2 wow slideInLeft" data-wow-delay="0.2s">
+										<b style="font-size:22px;">${ b.banner_title }</b>
+									</div>
+									<div class="mb-2 wow fadeInUp" data-wow-delay="0.3s">
+										${ b.banner_content }
+									</div>
+								</div>
 							</div>
-						</div>
-						<div class="carousel-item img-wrapper">
-							<div class="carousel-caption d-none d-md-block">
-								<h5>Second slide label</h5>
-								<p>Some representative placeholder content for the second slide.</p>
+						</c:if>
+						<c:if test="${ st.count ne 1 }">
+							<div class="carousel-item img-wrapper" style="background-image: url('${ pageContext.servletContext.contextPath }/resources/banner/${ b.photo_path }');">
+								<div class=" d-md-block wow fadeInUp" data-wow-delay="0.2s" style="position:absolute;bottom:4%; left:3%;text-shadow: 2px 2px 4px black; color:white;">
+									<div class="mb-2">
+										<b style="font-size:22px;">${ b.banner_title }</b>
+									</div>
+									${ b.banner_content }
+								</div>
 							</div>
-						</div>
-						<div class="carousel-item img-wrapper">
-							<div class="carousel-caption d-none d-md-block">
-								<h5>Third slide label</h5>
-								<p>Some representative placeholder content for the third slide.</p>
-							</div>
-						</div>
+						</c:if>									
+						</c:forEach>
+					<!-- -------------------------- -->	
+						
+						
+					<!-- ----------------------------- -->	
 					</div>
 					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
 						<span class="carousel-control-prev-icon" aria-hidden="true"></span>

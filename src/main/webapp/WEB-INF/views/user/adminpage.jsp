@@ -1,11 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<c:set var="list" value="${ requestScope.list }" />
+<c:set var="name" value="${ requestScope.name }" />
 <!DOCTYPE html>
 <html>
 <head>
 <style>
+.search input {
+	width: 300px;
+	height: 30px;
+	border: 2px solid rgb(209, 207, 207);
+	border-radius: 15px;
+}
+
+#searchName::placeholder {
+	text-align: center;
+	font-size: 14px;
+	opacity: 0.7;
+}
+
+#nametag::placeholder {
+	text-align: center;
+	font-size: 18px;
+	font-weight: 700;
+}
+#btn1 {
+	width: 70px;
+	padding: 2px;
+	border-radius: 20px;
+	box-shadow: none;
+}
+.img-wrapper {
+			    width: 100%;
+				height: 100%;			    
+			    background-repeat: no-repeat;
+			    background-size: cover;
+			    background-position: center;
+			}
 table {
 	width: 100%;
 	border: 0px solid #444444;
@@ -14,6 +46,14 @@ table {
 
 .tdd td {
 	border: 0px solid #444444;
+	align:center;
+}		
+
+.tdd th {
+	border: 0px solid #444444;
+	text-align:center;
+	align:center;
+	padding:5px 0px 3px 0px;
 }
 
 .myline {
@@ -41,11 +81,11 @@ table {
 	top: -20px
 }
 
-input[type="radio"] {
+.radio1 input[type="radio"] {
 	display: none;
 }
 
-input[type="radio"]+label {
+.radio1 input[type="radio"]+label {
 	display: inline-block;
 	font-size: 18px;
 	font-weight: nomal;
@@ -54,13 +94,18 @@ input[type="radio"]+label {
 	cursor: pointer;
 }
 
-input[type="radio"]:checked+label {
+
+
+.radio1 input[type="radio"]:checked+label {
 	color: black;
 	font-size: 20px;
 	opacity: 1;
 	font-weight: bolder;
 }
 
+.radio2 input[type="radio"] {
+	display: block;
+}
 .conbox {
 	margin: 0 auto;
 	display: none;
@@ -91,11 +136,25 @@ textarea#t2 {
 	font-size: 14px;
 	resize: none;
 }
-
-
-
 .fileBox input[type="file"] {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+
 </style>
+<script type="text/javascript">
+	// 로그인 가능/제한 라디오 체크를 변경했을 때 실행되는 함수임
+	function changeLogin(element) {
+		// 선택한 radio의 name속성의 이름에서 userid분리 추출함
+		var user_no = element.name.substring(8);
+		console.log("changeLogin : " + user_no);
+		if(element.checked == true && element.value == "false") {
+			//로그인 제한을 체크했다면
+			console.log("로그인 제한 체크함");
+			location.href = "${ pageContext.servletContext.contextPath }/loginok.do?user_no=" + user_no + "&login_ok=N";
+		} else {
+			console.log("로그인 제한 해제함");
+			location.href = "${ pageContext.servletContext.contextPath }/loginok.do?user_no=" + user_no + "&login_ok=Y";
+		}
+	}
+</script>
 
 <title>Makaan - Real Estate HTML Template</title>
 <c:import url="/WEB-INF/views/parts/head.jsp" />
@@ -145,15 +204,14 @@ textarea#t2 {
 										<td width="76px"><div style="width: 75px;">
 												<h5 class="fw-bold mb-0">관 리 자</h5>
 											</div></td>
-										<td width="28%"><small style="color: #41CE96;">01</small></td>
-										<td rowspan="2" colspan="2" align="right"><a href="#"
-											class="btn btn-outline-primary active" style="box-shadow: none;">수정하기</a>
+										<td width="28%"></td>
+										<td rowspan="2" colspan="2" align="right">
 										</td>
 											
 
 									</tr>
-									<tr height="20px">
-										<td colspan="2" align="left"><small><b>user01@naver.com</b></small></td>
+									<tr height="3px">
+										<td colspan="2" align="left"></td>
 									</tr>
 									<tr height="0px">
 										<td colspan="4"><div class="myline" style="width:100%"></div>
@@ -187,7 +245,7 @@ textarea#t2 {
 					<div class="col-lg-12 col-md-12 wow fadeInUp" data-wow-delay="0.1s">
 						<div class="team-item rounded overflow-hidden">
 							<div class="p-4 mt-1">
-								<div class="tab_content">
+								<div class="tab_content radio1">
 									<input type="radio" name="tabmenu" id="tab01" checked>
 									<label for="tab01">베너 등록</label> 
 									<input type="radio" name="tabmenu" id="tab02"> 
@@ -198,16 +256,18 @@ textarea#t2 {
 									<label for="tab04">신고된 사진</label>
 
 									<div class="conbox con1">
-									<form>
+									<form action="insertBanner.do" method="post" enctype="multipart/form-data">
 										<br>
 										<div class="myline"></div>
 										<br><br>
 										<!-- 베너등록창 -->
+										
 										<div class="fileBox" align="center">
 											<div style="width:80%" align="left">
-											<input type="text" class="fileName" readonly="readonly" style="width:400px; height:40px;padding-left:10px;margin-right:10px;">
-											<label for="uploadBtn" class="btn btn-outline-primary active" style="padding:10px; height:42px; box-shadow: none;">베너이미지 업로드</label> <input
-												type="file" id="uploadBtn" class="uploadBtn" accept="image/png, image/jpeg">
+											<input type="text" name="fileName" class="fileName" readonly="readonly" style="width:50%; height:40px;padding-left:10px;margin-right:10px;">
+											
+											<input name="file" type="file" id="uploadBtn" class="uploadBtn" accept="image/png, image/jpeg">
+											<label for="uploadBtn" class="btn btn-outline-primary active" style="width:130px;padding:10px; height:42px; box-shadow: none;">이미지 업로드</label> 
 											</div>
 										</div>
 										<div style="padding-top:20px;" align="center">
@@ -219,14 +279,14 @@ textarea#t2 {
 														name="title" />
 										</div>
 										<div style="padding-top:20px" align="center">
-										<textarea style="font-size:16px;" rows="10" id="t2" name="board_content" placeholder="내용을 입력하세요..."
+										<textarea style="font-size:16px;" rows="10" id="t2" name="content" placeholder="내용을 입력하세요..."
 														onfocus="this.placeholder=''"
 														onblur="this.placeholder='내용을 입력하세요...'"></textarea>
 										</div>										
 										<div style="padding-top:15px" align="center">
 											<div style="width:80%" align="right">
-											<a href="#"
-												class="btn btn-outline-primary active" style="box-shadow: none;">&nbsp;등 록&nbsp;</a>
+											<input type="submit" value="&nbsp;등 록&nbsp;" class="btn btn-outline-primary active" style="box-shadow: none;">
+											
 											</div>
 										</div>
 										<br>
@@ -240,61 +300,32 @@ textarea#t2 {
 										<div align="center">
 										<!-- 베너삭제창 -->
 										<table class="tdd" style="width:80%;">
-											<!-- 분리 -->
-											<tr>
-												<td colspan="3">&nbsp;</td>
-											</tr>
-											<tr>
-												<td rowspan="2" style="width:270px; padding-right: 20px;"><div class="ban"></div></td>
-												<td style="height:15px; vertical-align:top; padding-bottom:10px;"><b style="font-size:18px;">제목 텍스트</b></td>
-												<td rowspan="2" style="width:10%;vertical-align:top; text-align:center;"><a href="#"
-												class="btn btn-outline-primary active" style="box-shadow: none;">&nbsp;삭제&nbsp;</a></td>
-											</tr>
-											<tr>
-												<td style="vertical-align:top;"><div style="opacity:0.8;">
-												내용 텍스트 들어갈곳 줄바꿈 포함으로 작성예정<br>
-												내용 텍스트 들어갈곳 줄바꿈 줄바꿈 줄바꿈 포함으로 작성예정<br>
-												내용 텍스트 들어갈곳줄바꿈  줄바꿈 포함으로 작성예정<br>												
-												</div></td>												
-											</tr>
+											<c:forEach items="${ requestScope.banner }" var="b">
+												<tr>
+													<td colspan="3">&nbsp;</td>
+												</tr>
+												<tr>
+													<td rowspan="2" style="width:270px; padding-right: 20px;">
+														<div class="ban img-wrapper" 
+															style="background-image: url('${ pageContext.servletContext.contextPath }/resources/banner/${ b.photo_path }');">
+														</div>
+													</td>
+													<td style="height:15px; vertical-align:top; padding-bottom:10px;"><b style="font-size:18px;">${ b.banner_title }</b></td>
+													<td rowspan="2" style="width:10%;vertical-align:top; text-align:center;">
+													<c:url var="bd" value="bannerDelete.do">
+														<c:param name="banner_no" value="${ b.banner_no }" />
+													</c:url>
+													<a href="${ bd }" class="btn btn-outline-primary active" style="box-shadow: none;">
+													&nbsp;삭제&nbsp;
+													</a></td>
+												</tr>
+												<tr>
+													<td style="vertical-align:top;"><div style="opacity:0.8;">
+													${ b.banner_content }												
+													</div></td>												
+												</tr>
+											</c:forEach>
 											
-											<!-- 분리 -->
-											<tr>
-												<td colspan="3">&nbsp;</td>
-											</tr>
-											<tr>
-												<td rowspan="2" style="width:270px; padding-right: 20px;"><div class="ban"></div></td>
-												<td style="height:15px; vertical-align:top; padding-bottom:10px;"><b style="font-size:18px;">제목 텍스트</b></td>
-												<td rowspan="2" style="width:10%;vertical-align:top; text-align:center;"><a href="#"
-												class="btn btn-outline-primary active" style="box-shadow: none;">&nbsp;삭제&nbsp;</a></td>
-											</tr>
-											<tr>
-												<td style="vertical-align:top;"><div style="opacity:0.8;">
-												내용 텍스트 들어갈곳 줄바꿈 포함으로 작성예정<br>
-												내용 텍스트 들어갈곳 줄바꿈 줄바꿈 줄바꿈 포함으로 작성예정<br>
-												내용 텍스트 들어갈곳줄바꿈  줄바꿈 포함으로 작성예정<br>												
-												</div></td>												
-											</tr>
-											
-											<!-- 분리 -->
-											<tr>
-												<td colspan="3">&nbsp;</td>
-											</tr>
-											<tr>
-												<td rowspan="2" style="width:270px; padding-right: 20px;"><div class="ban"></div></td>
-												<td style="height:15px; vertical-align:top; padding-bottom:10px;"><b style="font-size:18px;">제목 텍스트</b></td>
-												<td rowspan="2" style="width:10%;vertical-align:top; text-align:center;"><a href="#"
-												class="btn btn-outline-primary active" style="box-shadow: none;">&nbsp;삭제&nbsp;</a></td>
-											</tr>
-											<tr>
-												<td style="vertical-align:top;"><div style="opacity:0.8;">
-												내용 텍스트 들어갈곳 줄바꿈 포함으로 작성예정<br>
-												내용 텍스트 들어갈곳 줄바꿈 줄바꿈 줄바꿈 포함으로 작성예정<br>
-												내용 텍스트 들어갈곳줄바꿈  줄바꿈 포함으로 작성예정<br>												
-												</div></td>												
-											</tr>
-											
-											<!-- 분리 -->
 											
 										</table>									
 										</div>
@@ -306,10 +337,95 @@ textarea#t2 {
 										<br>
 										<div class="myline"></div>
 										<br>
-										<div style="height: 600px; width: 200px;">
-										회원관리창
+										<div  align="center">											
+											<div class="search">
+												<input id="searchName" type="text" size="15"
+													placeholder="검색할 이름을 입력하세요..." onfocus="this.placeholder=''"
+													onblur="this.placeholder='검색할 이름을 입력하세요...'" name="user_name"  style="margin-bottom:10px;"/>
+												&nbsp;
+												<button id="btn1" class="btn btn-primary" type="submit" style="box-shadow: none;">search</button>
+											</div>	
 										</div>
-
+										<div class="myline" style="margin-top:20px;margin-bottom:20px;"></div>
+										
+										<div style="width:100%">
+										<table id="userList" class="tdd" style="text-align:center;align:center">
+											<tr style="background:#C2E8D6;">
+												<th style="width:5px;"></th>
+												<th></th>
+												<th style="width:90px;">이름</th>
+												<th>이메일</th>
+												<th style="width:120px;"><div style="margin-bottom:-28px;">로그인</div><br>
+												<div style="font-size:12px; opacity:0.7;">(Y/N)</div>
+												</th>
+												<th style="width:100px;"><div style="margin-bottom:-28px;">관리자</div><br>
+												<div style="font-size:12px; opacity:0.7;">(Y/N)</div>
+												</th>
+												<th style="width:5px;"></th>
+											</tr>
+											<c:forEach items="${ requestScope.list }" var="l" varStatus="lc">
+											<c:if test="${ lc.count % 2 ne 0 }">
+												<tr>	
+													<td></td>
+													<td style="width:40px;padding:5px 0px 3px 0px;">${ l.user_no }</td>
+													<td style="width:70px;">${ l.user_name }</td>
+													<td style="opacity:0.8">${ l.user_email }</td>
+													<td class="radio2">
+													<c:if test="${ l.login_ok eq 'Y'}">
+														<label style="margin-right:10px"><input type="radio" name="loginok_${ l.user_no }" onchange="changeLogin(this);" value="true" checked /> </label>
+														<label><input type="radio" name="loginok_${ l.user_no }" onchange="changeLogin(this);"value="false" /></label>
+													</c:if>
+													<c:if test="${ l.login_ok eq 'N'}">
+														<label style="margin-right:10px"><input type="radio" name="loginok_${ l.user_no }" onchange="changeLogin(this);" value="true" /></label>
+														<label><input type="radio" name="loginok_${ l.user_no }" onchange="changeLogin(this);" value="false" checked/></label>
+													</c:if>
+													</td>
+													<td class="radio2">
+													<c:if test="${ l.user_admin eq 'Y'}">
+														<label style="margin-right:10px"><input type="radio" name="admin_${ l.user_no }" value="true" checked /> </label>
+														<label><input type="radio" name="admin_${ l.user_no }" value="false" /></label>
+													</c:if>
+													<c:if test="${ l.user_admin eq 'N'}">
+														<label style="margin-right:10px"><input type="radio" name="admin_${ l.user_no }" value="true" /></label>
+														<label><input type="radio" name="admin_${ l.user_no }" value="false" checked/></label>
+													</c:if>
+													</td>
+													<td></td>
+												</tr>
+											</c:if>
+												<c:if test="${ lc.count % 2 eq 0 }">
+												<tr style="background:#E8FBF2">	
+													<td></td>
+													<td padding:5px 0px 3px 0px;">${ l.user_no }</td>
+													<td style="width:70px;">${ l.user_name }</td>
+													<td style="opacity:0.8">${ l.user_email }</td>
+													<td style="width:70px;"class="radio2">
+													<c:if test="${ l.login_ok eq 'Y'}">
+														<label style="margin-right:10px"><input type="radio" name="loginok_${ l.user_no }" onchange="changeLogin(this);" value="true" checked /> </label>
+														<label><input type="radio" name="loginok_${ l.user_no }" onchange="changeLogin(this);" value="false" /></label>
+													</c:if>
+													<c:if test="${ l.login_ok eq 'N'}">
+														<label style="margin-right:10px"><input type="radio" name="loginok_${ l.user_no }" onchange="changeLogin(this);" value="true" /></label>
+														<label><input type="radio" name="loginok_${ l.user_no }" onchange="changeLogin(this);" value="false" checked/></label>
+													</c:if>
+													</td>
+													<td class="radio2">
+													<c:if test="${ l.user_admin eq 'Y'}">
+														<label style="margin-right:10px"><input type="radio" name="admin_${ l.user_no }" value="true" checked /> </label>
+														<label><input type="radio" name="admin_${ l.user_no }" value="false" /></label>
+													</c:if>
+													<c:if test="${ l.user_admin eq 'N'}">
+														<label style="margin-right:10px"><input type="radio" name="admin_${ l.user_no }" value="true" /></label>
+														<label><input type="radio" name="admin_${ l.user_no }" value="false" checked/></label>
+													</c:if>
+													</td>
+													<td></td>
+												</tr>
+											</c:if>
+											</c:forEach>
+										</table>
+										</div>
+			
 									</div>
 									<div class="conbox con4">
 										<br>
@@ -353,5 +469,126 @@ uploadFile.on('change', function(){
 	}
 	$(this).siblings('.fileName').val(filename);
 });
+
+$('#searchName').keypress(function(e){
+   if(e.keyCode == 13){
+       $('#btn1').click();
+   }
+})
+
+$('#btn1').click(function(){
+   var user_name = $('#searchName').val();
+   console.log(user_name);
+
+   $.ajax({
+       url: 'searchUserName.do',
+       type: "post",
+       data: {'user_name': user_name},
+       dataType: "json",
+       success:function(data){
+           
+           console.log("success : "+ data);
+          
+           var jsonStr = JSON.stringify(data);
+           
+           var json = JSON.parse(jsonStr);
+           
+           var values = "";
+           if(jsonStr.length == 11){
+           	alert("검색결과가 없습니다.");                    	
+           }else{
+        	  
+        	   values +=
+             		"<tr style='background:#C2E8D6;'>"
+						+"<th style='width:5px;'></th>"
+						+"<th></th>"
+						+"<th style='width:90px;'>이름</th>"
+						+"<th>이메일</th>"
+						+"<th style='width:120px;'><div style='margin-bottom:-28px;'>로그인</div><br>"
+						+"<div style='font-size:12px; opacity:0.7;'>(Y/N)</div>"
+						+"</th>"
+						+"<th style='width:100px;'><div style='margin-bottom:-28px;'>관리자</div><br>"
+						+"<div style='font-size:12px; opacity:0.7;'>(Y/N)</div>"
+						+"</th>"
+						+"<th style='width:5px;'></th>"
+					+"</tr>"
+					
+              
+			  for(var i in json.list){
+				  
+				console.log(json.list[i]);
+				if(json.list[i].login_ok == "Y"){
+				 	loginv="<label style='margin-right:10px'><input type='radio' name='loginok_"
+					+json.list[i].user_no
+					+"' onchange='changeLogin(this);' value='true' checked /> </label><label><input type='radio' name='loginok_"
+					+json.list[i].user_no
+					+"' onchange='changeLogin(this);' value='false' /></label>"
+				}else{
+					loginv="<label style='margin-right:10px'><input type='radio' name='loginok_"
+					+json.list[i].user_no
+					+"' onchange='changeLogin(this);' value='true'/> </label><label><input type='radio' name='loginok_"
+					+json.list[i].user_no
+					+"' onchange='changeLogin(this);' value='false' checked/></label>"
+				}
+		
+				if(json.list[i].user_admin == "Y"){
+					adminv="<label style='margin-right:10px'><input type='radio' name='admin_"
+					+json.list[i].user_no
+					+"' value='true' checked /> </label><label><input type='radio' name='admin_"
+					+json.list[i].user_no
+					+"'  value='false' /></label>"
+				}else{
+					adminv="<label style='margin-right:10px'><input type='radio' name='admin_"
+					+json.list[i].user_no
+					+"' value='true'/> </label><label><input type='radio' name='admin_"
+					+json.list[i].user_no
+					+"' value='false' checked/></label>"
+				}
+				
+            	if(i % 2 == 0){
+              		
+              		
+              	values += 
+              			//----------------------------------------------------------------------------
+           			"<tr><td></td><td style='width:40px;padding:5px 0px 3px 0px;'>"
+           			+json.list[i].user_no
+           			+"</td><td style='width:70px;'>"
+           			+decodeURIComponent(json.list[i].user_name).replace(/\+/gi, " ")
+           			+"</td><td style='opacity:0.8'>"
+           			+json.list[i].user_email
+           			+"</td><td class='radio2'>"
+					+ loginv
+             		+"</td>"
+					+"<td class='radio2'>"
+					+ adminv
+					+"</td><td></td></tr>"
+             			
+              			//-------------------------------------------------------------
+              	}else{
+          				//----------------------------------------------------------------------------
+              		"<tr><td></td><td style='width:40px;padding:5px 0px 3px 0px;'>"
+          			+json.list[i].user_no
+          			+"</td><td style='width:70px;'>"
+          			+decodeURIComponent(json.list[i].user_name).replace(/\+/gi, " ")
+          			+"</td><td style='opacity:0.8'>"
+          			+json.list[i].user_email
+          			+"</td><td class='radio2'>"
+					+ loginv
+          			+"</td>"
+					+"<td class='radio2'>"
+					+ adminv
+					+"</td><td></td></tr>"
+              		
+              	}                    
+              }
+              $("#userList").empty();
+              $("#userList").html($("#userList").html()+values);
+           } 
+       },
+       error:function(jqXHR, textstatus, errorthrown){
+			console.log("error : " + jqXHR + ", " + textstatus + ", " + errorthrown);
+		}
+   });
+})
 </script>
 </html>

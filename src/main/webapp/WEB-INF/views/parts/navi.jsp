@@ -41,10 +41,10 @@ hr {
                 	<a href="#" class="nav-item nav-link" id="aa" data-bs-toggle="modal" data-bs-target="#exampleModal">login</a>
                 </c:if>
                 <c:if test="${ !empty sessionScope.loginUser }">
-	                <a href="mypage.do" class="nav-item nav-link">Mytest</a>
- 	                <c:if test="${ loginUser.user_admin eq 'Y' }">
+	                <a href="mypage.do" class="nav-item nav-link">Mypage</a>
+	 	            <c:if test="${ loginUser.user_admin eq 'Y' }">
 	                	<a href="admin.do" class="nav-item nav-link">Admin</a>
-                	</c:if>
+	               	</c:if>
 	                <a href="http://localhost:8080/landmarker/logout.do" class="nav-item nav-link" >logout</a>
                 </c:if>
             </div>
@@ -52,30 +52,29 @@ hr {
         </div>
     </nav>
     <div class="modal fade" id="exampleModal" tabindex="-1"
-	aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="btn-close" data-bs-dismiss="modal"
-					aria-label="Close"></button>
-			</div>
-			<div align="center">
-				<img style="width: 290px;height: 127px;" src="${ pageContext.servletContext.contextPath }/resources/userImages/landmarker.PNG">
-			</div>
-			<div id="modal-body" class="modal-body" align="center">
-				<a href="https://kauth.kakao.com/oauth/authorize?client_id=53ae3074ebb4e336e3b34b90ab5d2f8c&redirect_uri=http://localhost:8888/landmarker/kakaoLogin.do&response_type=code" class="bt">
-					<img src="${ pageContext.servletContext.contextPath }/resources/userImages/kakao(eng).png">
-				</a><br>
-				<a href="http://localhost:8888/landmarker/naverlogin.do">
-					<img src="${ pageContext.servletContext.contextPath }/resources/userImages/naver(eng).png">
-				</a><br>
-<%-- 				<a href=" + result.googleUrl + ">
-					<img src="${ pageContext.servletContext.contextPath }/resources/userImages/google.png">
-				</a><br> --%>
-				<br>
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div align="center">
+					<img style="width: 290px;height: 127px;" src="${ pageContext.servletContext.contextPath }/resources/userImages/landmarker.PNG">
+				</div>
+				<div id="modal-body" class="modal-body" align="center">
+					<a href="https://kauth.kakao.com/oauth/authorize?client_id=53ae3074ebb4e336e3b34b90ab5d2f8c&redirect_uri=http://localhost:8888/landmarker/kakaoLogin.do&response_type=code" class="bt">
+						<img src="${ pageContext.servletContext.contextPath }/resources/userImages/kakao(eng).png">
+					</a><br>
+					<a href="http://localhost:8888/landmarker/naverlogin.do">
+						<img src="${ pageContext.servletContext.contextPath }/resources/userImages/naver(eng).png">
+					</a><br>
+<%--	 				<a href=" + result.googleUrl + ">
+						<img src="${ pageContext.servletContext.contextPath }/resources/userImages/google.png">
+					</a><br> --%>
+					<br>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-
 </div>
