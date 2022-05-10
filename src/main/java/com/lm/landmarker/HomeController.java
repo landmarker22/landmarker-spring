@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lm.landmarker.banner.model.vo.Banner;
+import com.lm.landmarker.gallery.model.vo.Gallery;
+import com.lm.landmarker.galleryinfo.model.vo.Galleryinfo;
 import com.lm.landmarker.user.model.service.UserService;
 
 /**
@@ -43,8 +45,14 @@ public class HomeController {
 
 	@RequestMapping(value = "main.do", method = RequestMethod.GET)
 	public String main(Model model) {
+		
 		ArrayList<Banner> banner= userService.bannerList();		
-		model.addAttribute("banner", banner );		
+		ArrayList<Galleryinfo> new3 = userService.new3List();
+		ArrayList<Galleryinfo> topweek = userService.topWeekList();
+		
+		model.addAttribute("banner", banner );	
+		model.addAttribute("new3", new3);
+		model.addAttribute("top3", topweek);
 		
 		return "common/main";
 	}

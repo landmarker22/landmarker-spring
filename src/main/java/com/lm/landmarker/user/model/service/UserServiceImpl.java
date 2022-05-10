@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.lm.landmarker.banner.model.vo.Banner;
 import com.lm.landmarker.gallery.model.vo.Gallery;
+import com.lm.landmarker.galleryinfo.model.vo.Galleryinfo;
 import com.lm.landmarker.landmark.model.vo.Landmark;
 import com.lm.landmarker.user.model.dao.UserDao;
 import com.lm.landmarker.user.model.vo.User;
@@ -131,4 +132,22 @@ public class UserServiceImpl implements UserService {
 	public int selectLink(String link_key) {
 		return userDao.selectLink(link_key);
 	}
+
+	@Override
+	public void updateAdmin(User user) {
+		userDao.updateAdmin(user);
+		
+	}
+
+	@Override
+	public ArrayList<Galleryinfo> new3List() {
+		return userDao.new3List();
+	}
+
+	@Override
+	public ArrayList<Galleryinfo> topWeekList() {
+		return userDao.topWeekList();
+	}
+
+	
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.lm.landmarker.banner.model.vo.Banner;
 import com.lm.landmarker.gallery.model.vo.Gallery;
+import com.lm.landmarker.galleryinfo.model.vo.Galleryinfo;
 import com.lm.landmarker.landmark.model.vo.Landmark;
 import com.lm.landmarker.user.model.vo.User;
 
@@ -57,4 +58,11 @@ public interface UserService {
 	int deleteDate();
 	
 	int selectLink(String link_key);
+
+	void updateAdmin(User user);
+
+	ArrayList<Galleryinfo> new3List();
+
+	ArrayList<Galleryinfo> topWeekList();
+
 }

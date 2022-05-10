@@ -145,19 +145,41 @@ textarea#t2 {
 		// 선택한 radio의 name속성의 이름에서 userid분리 추출함
 		var user_no = element.name.substring(8);
 		console.log("changeLogin : " + user_no);
-		if(element.checked == true && element.value == "false") {
-			//로그인 제한을 체크했다면
-			console.log("로그인 제한 체크함");
-			location.href = "${ pageContext.servletContext.contextPath }/loginok.do?user_no=" + user_no + "&login_ok=N";
-		} else {
-			console.log("로그인 제한 해제함");
-			location.href = "${ pageContext.servletContext.contextPath }/loginok.do?user_no=" + user_no + "&login_ok=Y";
-		}
+		$.ajax({
+		       url: 'changeLoginOK.do',
+		       type: "post",
+		       data: {'user_no': user_no},
+		       dataType: "json",
+		       success:function(data){
+		           console.log("로그인제한 바뀜");
+		       },
+		       error:function(jqXHR, textstatus, errorthrown){
+					console.log("error : " + jqXHR + ", " + textstatus + ", " + errorthrown);
+				}
+		})
+	}
+	function changeAdmin(element) {
+		// 선택한 radio의 name속성의 이름에서 userid분리 추출함
+		var user_no = element.name.substring(6);
+		console.log("changeLogin : " + user_no);
+		$.ajax({
+		       url: 'changeAdmin.do',
+		       type: "post",
+		       data: {'user_no': user_no},
+		       dataType: "json",
+		       success:function(data){
+		           console.log("어드민권한 바뀜");
+		       },
+		       error:function(jqXHR, textstatus, errorthrown){
+					console.log("error : " + jqXHR + ", " + textstatus + ", " + errorthrown +"어드민변경오류");
+				}
+		})
 	}
 </script>
 
 <title>Makaan - Real Estate HTML Template</title>
 <c:import url="/WEB-INF/views/parts/head.jsp" />
+
 </head>
 <body>
 	<div class="container-xxl bg-white p-0">
@@ -179,15 +201,7 @@ textarea#t2 {
 		<div class="container-fluid header bg-white p-5">
 			<br>
 		</div>
-
-
 		<!-- Header End -->
-
-
-
-
-
-		<!-- Team Start -->
 		<div class="container-xxl py-3">
 			<div class="container">
 				<br>
@@ -207,8 +221,6 @@ textarea#t2 {
 										<td width="28%"></td>
 										<td rowspan="2" colspan="2" align="right">
 										</td>
-											
-
 									</tr>
 									<tr height="3px">
 										<td colspan="2" align="left"></td>
@@ -218,11 +230,9 @@ textarea#t2 {
 											<div style=""></div></td>
 									</tr>
 									<tr>
-										
 										<td colspan="2" class="text-center"><b style="opacity: 0.8">신고된사진</b></td>
 										<td colspan="2" width="56%" class="text-center"><b
 											style="opacity: 0.8">전체 게시글</b></td>
-										
 									</tr>
 									<tr>
 										<td height="30px"></td>
@@ -235,14 +245,13 @@ textarea#t2 {
 												style="height: 70px;">
 												<b class="mynum" style="font-size: 80px; color: #ADE8CE">150</b>
 											</div></td>
-										
 									</tr>
 								</table>
 							</div>
 						</div>
 					</div>
 					
-					<div class="col-lg-12 col-md-12 wow fadeInUp" data-wow-delay="0.1s">
+					<div class="col-lg-12 col-md-12 wow fadeInUp mb-4" data-wow-delay="0.1s">
 						<div class="team-item rounded overflow-hidden">
 							<div class="p-4 mt-1">
 								<div class="tab_content radio1">
@@ -382,12 +391,12 @@ textarea#t2 {
 													</td>
 													<td class="radio2">
 													<c:if test="${ l.user_admin eq 'Y'}">
-														<label style="margin-right:10px"><input type="radio" name="admin_${ l.user_no }" value="true" checked /> </label>
-														<label><input type="radio" name="admin_${ l.user_no }" value="false" /></label>
+														<label style="margin-right:10px"><input type="radio" name="admin_${ l.user_no }" onchange="changeAdmin(this);" value="true" checked /> </label>
+														<label><input type="radio" name="admin_${ l.user_no }" onchange="changeAdmin(this);" value="false" /></label>
 													</c:if>
 													<c:if test="${ l.user_admin eq 'N'}">
-														<label style="margin-right:10px"><input type="radio" name="admin_${ l.user_no }" value="true" /></label>
-														<label><input type="radio" name="admin_${ l.user_no }" value="false" checked/></label>
+														<label style="margin-right:10px"><input type="radio" name="admin_${ l.user_no }" onchange="changeAdmin(this);" value="true" /></label>
+														<label><input type="radio" name="admin_${ l.user_no }" onchange="changeAdmin(this);" value="false" checked/></label>
 													</c:if>
 													</td>
 													<td></td>
@@ -411,12 +420,12 @@ textarea#t2 {
 													</td>
 													<td class="radio2">
 													<c:if test="${ l.user_admin eq 'Y'}">
-														<label style="margin-right:10px"><input type="radio" name="admin_${ l.user_no }" value="true" checked /> </label>
-														<label><input type="radio" name="admin_${ l.user_no }" value="false" /></label>
+														<label style="margin-right:10px"><input type="radio" name="admin_${ l.user_no }" onchange="changeAdmin(this);" value="true" checked /> </label>
+														<label><input type="radio" name="admin_${ l.user_no }" onchange="changeAdmin(this);" value="false" /></label>
 													</c:if>
 													<c:if test="${ l.user_admin eq 'N'}">
-														<label style="margin-right:10px"><input type="radio" name="admin_${ l.user_no }" value="true" /></label>
-														<label><input type="radio" name="admin_${ l.user_no }" value="false" checked/></label>
+														<label style="margin-right:10px"><input type="radio" name="admin_${ l.user_no }" onchange="changeAdmin(this);" value="true" /></label>
+														<label><input type="radio" name="admin_${ l.user_no }" onchange="changeAdmin(this);" value="false" checked/></label>
 													</c:if>
 													</td>
 													<td></td>
@@ -518,13 +527,15 @@ $('#btn1').click(function(){
 				  
 				console.log(json.list[i]);
 				if(json.list[i].login_ok == "Y"){
-				 	loginv="<label style='margin-right:10px'><input type='radio' name='loginok_"
+				 loginv=
+				 		"<label style='margin-right:10px'><input type='radio' name='loginok_"
 					+json.list[i].user_no
 					+"' onchange='changeLogin(this);' value='true' checked /> </label><label><input type='radio' name='loginok_"
 					+json.list[i].user_no
 					+"' onchange='changeLogin(this);' value='false' /></label>"
 				}else{
-					loginv="<label style='margin-right:10px'><input type='radio' name='loginok_"
+				loginv=
+					"<label style='margin-right:10px'><input type='radio' name='loginok_"
 					+json.list[i].user_no
 					+"' onchange='changeLogin(this);' value='true'/> </label><label><input type='radio' name='loginok_"
 					+json.list[i].user_no
@@ -532,17 +543,19 @@ $('#btn1').click(function(){
 				}
 		
 				if(json.list[i].user_admin == "Y"){
-					adminv="<label style='margin-right:10px'><input type='radio' name='admin_"
+				adminv=
+					"<label style='margin-right:10px'><input type='radio' name='admin_"
 					+json.list[i].user_no
-					+"' value='true' checked /> </label><label><input type='radio' name='admin_"
+					+"'onchange='changeAdmin(this);' value='true' checked /> </label><label><input type='radio' name='admin_"
 					+json.list[i].user_no
-					+"'  value='false' /></label>"
+					+"'onchange='changeAdmin(this);'  value='false' /></label>"
 				}else{
-					adminv="<label style='margin-right:10px'><input type='radio' name='admin_"
+				adminv=
+					"<label style='margin-right:10px'><input type='radio' name='admin_"
 					+json.list[i].user_no
-					+"' value='true'/> </label><label><input type='radio' name='admin_"
+					+"'onchange='changeAdmin(this);' value='true'/> </label><label><input type='radio' name='admin_"
 					+json.list[i].user_no
-					+"' value='false' checked/></label>"
+					+"'onchange='changeAdmin(this);' value='false' checked/></label>"
 				}
 				
             	if(i % 2 == 0){
@@ -566,7 +579,8 @@ $('#btn1').click(function(){
               			//-------------------------------------------------------------
               	}else{
           				//----------------------------------------------------------------------------
-              		"<tr><td></td><td style='width:40px;padding:5px 0px 3px 0px;'>"
+              	values +=
+          			"<tr style='background:#E8FBF2'><td></td><td style='width:40px;padding:5px 0px 3px 0px;'>"
           			+json.list[i].user_no
           			+"</td><td style='width:70px;'>"
           			+decodeURIComponent(json.list[i].user_name).replace(/\+/gi, " ")

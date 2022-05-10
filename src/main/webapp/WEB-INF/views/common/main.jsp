@@ -15,6 +15,17 @@
 			    background-size: cover;
 			    background-position: center;
 			}
+			
+			img.photo {
+				width:100%;
+				height:100%;				
+				padding:0px;
+				object-fit: cover;				
+				align:center;
+			}
+			#btnwhite:hover{
+			color:white;
+			}
 		</style>
 	</head>
 	<body>
@@ -91,277 +102,84 @@
 	        <!-- Property List Start -->
 	        <div class="container-xxl py-5">
 	            <div class="container">
- 	                <div class="row g-0 gx-5 align-items-end">
-	                    <div class="col-lg-6">
-	                        <div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
-	                            <h1 class="mb-3">최근 게시글</h1>
-<!-- 	                            <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit diam justo sed rebum.</p> -->
+ 	                <div class="row g-0 gx-5 wow fadeInUp"data-wow-delay="0.3s">
+	                    <div class="col-lg-12" >
+	                        <div class="text-center mx-auto mb-5 ">
+	                            <span style="font-weight:500; font-size:26px; opacity:0.9">New Post</span>
 	                        </div>
-	                    </div>
-	                    <div class="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
-	                        <ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
-	                            <li class="nav-item me-2">
-	                                <a class="btn btn-outline-primary active" data-bs-toggle="pill" href="${ pageContext.servletContext.contextPath }/resources/#tab-1">더보기</a>
-	                            </li>
-<%-- 	                            <li class="nav-item me-2">
-	                                <a class="btn btn-outline-primary" data-bs-toggle="pill" href="${ pageContext.servletContext.contextPath }/resources/#tab-2">For Sell</a>
-	                            </li>
-	                            <li class="nav-item me-0">
-	                                <a class="btn btn-outline-primary" data-bs-toggle="pill" href="${ pageContext.servletContext.contextPath }/resources/#tab-3">For Rent</a>
-	                            </li> --%>
-	                        </ul>
-	                    </div>
+	                    </div>    
 	                </div>
-<!-- 	                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-	                    <h1 class="mb-3">인기 게시글</h1>
-	                    <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
-	                </div> -->
 	                <div class="tab-content">
 	                    <div id="tab-1" class="tab-pane fade show p-0 active">
 	                        <div class="row g-4">
+	                            <!-- ----------------- -->
+	                            <c:forEach items="${ requestScope.new3 }" var="n">
 	                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-	                                <div class="property-item rounded overflow-hidden">
-	                                    <div class="position-relative overflow-hidden">
-	                                        <a class="detail" role="button"><img class="img-fluid" src="${ pageContext.servletContext.contextPath }/resources/img/property-1.jpg" alt=""></a>
-	                                        <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-2 py-1 px-2">#남산타워</div>
-<!--	                                        <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Appartment</div>-->
+	                                <div class="property-item rounded overflow-hidden" style="align: center; vertical-align: middle;">
+	                                    <div class="position-relative overflow-hidden" style="align: center; vertical-align: middle;">
+	                                        <a class="detail" role="button"><img style="width: 520px; height: 400px; object-fit: cover; padding:0px; align: center; vertical-align: middle;" 
+	                                        class="img-fluid photo" src="${ pageContext.servletContext.contextPath }/resources/galleryimg/${ n.photo_path }" ></a>
+	                                        <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-2 py-1 px-2">${ n.hashtag }</div>
 	                                    </div>
 	                                    <div class="p-3 pb-0">
-	                                        <h5 class="text-primary mb-2" style="float:left; margin:0px 10px 0px 0px;">Tester_ID</h5>
-											<h8 class="text-primary mb-3" style="float:left; margin:0px 10px 0px 0px;">여 행 중 독 자</h8>
+	                                        <h5 class="text-primary mb-2" style="float:left; margin:0px 10px 0px 0px;">${ n.user_name }</h5>
+											<h8 class="text-primary mb-3" style="float:left; margin:0px 10px 0px 0px;">${ n.user_badge }</h8>
 											<i class="bi bi-heart fs-5" style="float:right;"></i>
 											<a><i class="bi bi-heart-fill fs-5" style="float:right; color:#e06666;"></i></a>
-<!--	                                        <p style="clear:both;"><i class="fa fa-map-marker-alt text-primary me-2"></i><a class="text-dark" href="">서울 용산구 남산공원길 105</a></p>-->
 	                                    </div>
-<!--	                                    <div class="d-flex border-top">-->
-<!--&lt;!&ndash;	                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>&ndash;&gt;-->
-<!--	                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>-->
-<!--	                                        <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>-->
-<!--	                                    </div>-->
 	                                </div>
 	                            </div>
-	                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-	                                <div class="property-item rounded overflow-hidden">
-	                                    <div class="position-relative overflow-hidden">
-	                                        <a class="detail" role="button"><img class="img-fluid" src="${ pageContext.servletContext.contextPath }/resources/img/property-1.jpg" alt=""></a>
-	                                        <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-2 py-1 px-2">#남산타워</div>
-<!--	                                        <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Appartment</div>-->
-	                                    </div>
-	                                    <div class="p-3 pb-0">
-	                                        <h5 class="text-primary mb-2" style="float:left; margin:0px 10px 0px 0px;">Tester_ID</h5>
-											<h8 class="text-primary mb-3" style="float:left; margin:0px 10px 0px 0px;">여 행 중 독 자</h8>
-											<i class="bi bi-heart fs-5" style="float:right;"></i>
-											<a><i class="bi bi-heart-fill fs-5" style="float:right; color:#e06666;"></i></a>
-<!--	                                        <p style="clear:both;"><i class="fa fa-map-marker-alt text-primary me-2"></i><a class="text-dark" href="">서울 용산구 남산공원길 105</a></p>-->
-	                                    </div>
-<!--	                                    <div class="d-flex border-top">-->
-<!--&lt;!&ndash;	                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>&ndash;&gt;-->
-<!--	                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>-->
-<!--	                                        <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>-->
-<!--	                                    </div>-->
-	                                </div>
-	                            </div>
-	                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-	                                <div class="property-item rounded overflow-hidden">
-	                                    <div class="position-relative overflow-hidden">
-	                                        <a class="detail" role="button"><img class="img-fluid" src="${ pageContext.servletContext.contextPath }/resources/img/property-1.jpg" alt=""></a>
-	                                        <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-2 py-1 px-2">#남산타워</div>
-<!--	                                        <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Appartment</div>-->
-	                                    </div>
-	                                    <div class="p-3 pb-0">
-	                                        <h5 class="text-primary mb-2" style="float:left; margin:0px 10px 0px 0px;">Tester_ID</h5>
-											<h8 class="text-primary mb-3" style="float:left; margin:0px 10px 0px 0px;">여 행 중 독 자</h8>
-											<i class="bi bi-heart fs-5" style="float:right;"></i>
-											<a><i class="bi bi-heart-fill fs-5" style="float:right; color:#e06666;"></i></a>
-<!--	                                        <p style="clear:both;"><i class="fa fa-map-marker-alt text-primary me-2"></i><a class="text-dark" href="">서울 용산구 남산공원길 105</a></p>-->
-	                                    </div>
-<!--	                                    <div class="d-flex border-top">-->
-<!--&lt;!&ndash;	                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>&ndash;&gt;-->
-<!--	                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>-->
-<!--	                                        <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>-->
-<!--	                                    </div>-->
-	                                </div>
-	                            </div>
+	                            </c:forEach>
+	                            <div class="col-lg-12 text-end wow slideInRight" style="height:30px;" data-wow-delay="0.1s">
+	                             <ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
+			                           <li>
+			                               <a id="btnwhite"class="btn btn-outline-primary" href="${ pageContext.servletContext.contextPath }/resources/#tab-1">더보기</a>
+			                           </li>
+			                       </ul>
+	                               <!-- <a class="btn btn-outline-primary" href="${ pageContext.servletContext.contextPath }/resources/#tab-1">더보기</a>-->
+			                   </div>
+	                            <!-- ----------------- -->
 	                        </div>
 	                    </div>
 	                </div>
 	            </div>
 	        </div>
 	        <!-- Property List End -->
-	
-	
-<%-- 	        <!-- Category Start -->
-	        <div class="container-xxl py-5">
-	            <div class="container">
-	                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-	                    <h1 class="mb-3">Property Types</h1>
-	                    <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
-	                </div>
-	                <div class="row g-4">
-	                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-	                        <a class="cat-item d-block bg-light text-center rounded p-3" href="${ pageContext.servletContext.contextPath }/resources/">
-	                            <div class="rounded p-4">
-	                                <div class="icon mb-3">
-	                                    <img class="img-fluid" src="${ pageContext.servletContext.contextPath }/resources/img/icon-apartment.png" alt="Icon">
-	                                </div>
-	                                <h6>Apartment</h6>
-	                                <span>123 Properties</span>
-	                            </div>
-	                        </a>
-	                    </div>
-	                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-	                        <a class="cat-item d-block bg-light text-center rounded p-3" href="${ pageContext.servletContext.contextPath }/resources/">
-	                            <div class="rounded p-4">
-	                                <div class="icon mb-3">
-	                                    <img class="img-fluid" src="${ pageContext.servletContext.contextPath }/resources/img/icon-villa.png" alt="Icon">
-	                                </div>
-	                                <h6>Villa</h6>
-	                                <span>123 Properties</span>
-	                            </div>
-	                        </a>
-	                    </div>
-	                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-	                        <a class="cat-item d-block bg-light text-center rounded p-3" href="${ pageContext.servletContext.contextPath }/resources/">
-	                            <div class="rounded p-4">
-	                                <div class="icon mb-3">
-	                                    <img class="img-fluid" src="${ pageContext.servletContext.contextPath }/resources/img/icon-house.png" alt="Icon">
-	                                </div>
-	                                <h6>Home</h6>
-	                                <span>123 Properties</span>
-	                            </div>
-	                        </a>
-	                    </div>
-	                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-	                        <a class="cat-item d-block bg-light text-center rounded p-3" href="${ pageContext.servletContext.contextPath }/resources/">
-	                            <div class="rounded p-4">
-	                                <div class="icon mb-3">
-	                                    <img class="img-fluid" src="${ pageContext.servletContext.contextPath }/resources/img/icon-housing.png" alt="Icon">
-	                                </div>
-	                                <h6>Office</h6>
-	                                <span>123 Properties</span>
-	                            </div>
-	                        </a>
-	                    </div>
-	                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-	                        <a class="cat-item d-block bg-light text-center rounded p-3" href="${ pageContext.servletContext.contextPath }/resources/">
-	                            <div class="rounded p-4">
-	                                <div class="icon mb-3">
-	                                    <img class="img-fluid" src="${ pageContext.servletContext.contextPath }/resources/img/icon-building.png" alt="Icon">
-	                                </div>
-	                                <h6>Building</h6>
-	                                <span>123 Properties</span>
-	                            </div>
-	                        </a>
-	                    </div>
-	                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-	                        <a class="cat-item d-block bg-light text-center rounded p-3" href="${ pageContext.servletContext.contextPath }/resources/">
-	                            <div class="rounded p-4">
-	                                <div class="icon mb-3">
-	                                    <img class="img-fluid" src="${ pageContext.servletContext.contextPath }/resources/img/icon-neighborhood.png" alt="Icon">
-	                                </div>
-	                                <h6>Townhouse</h6>
-	                                <span>123 Properties</span>
-	                            </div>
-	                        </a>
-	                    </div>
-	                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-	                        <a class="cat-item d-block bg-light text-center rounded p-3" href="${ pageContext.servletContext.contextPath }/resources/">
-	                            <div class="rounded p-4">
-	                                <div class="icon mb-3">
-	                                    <img class="img-fluid" src="${ pageContext.servletContext.contextPath }/resources/img/icon-condominium.png" alt="Icon">
-	                                </div>
-	                                <h6>Shop</h6>
-	                                <span>123 Properties</span>
-	                            </div>
-	                        </a>
-	                    </div>
-	                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-	                        <a class="cat-item d-block bg-light text-center rounded p-3" href="${ pageContext.servletContext.contextPath }/resources/">
-	                            <div class="rounded p-4">
-	                                <div class="icon mb-3">
-	                                    <img class="img-fluid" src="${ pageContext.servletContext.contextPath }/resources/img/icon-luxury.png" alt="Icon">
-	                                </div>
-	                                <h6>Garage</h6>
-	                                <span>123 Properties</span>
-	                            </div>
-	                        </a>
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-	        <!-- Category End --> --%>
-	
+
 	
 	        <!-- Testimonial Start -->
-	        <div class="container-xxl py-5">
+	        <div class="container-xxl py-4 wow fade show fadeInUp" style="background:#EEEEEE;" data-wow-delay="0.3s">
 	            <div class="container">
-	                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-	                    <h1 class="mb-3">인기 게시글</h1>
+	                <div class="row g-0 gx-5 wow fadeInUp"data-wow-delay="0.4s">
+	                    <div class="col-lg-12" style="padding">
+	                        <div class="text-center mx-auto mb-3 ">
+	                            <span style="font-weight:900; font-size:28px; opacity:0.9; color:#00B98E;">"Hot Post"</span>
+	                        </div>
+	                    </div>    
 	                </div>
 	                <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+                   	    <!-- --------------- -->
+                   	    <c:forEach items="${ requestScope.top3 }" var="n">
                    	    <div class="testimonial-ite wow fadeInUp rounded p-3" data-wow-delay="0.1s">
-                            <div class="property-item rounded overflow-hidden">
-                                <div class="position-relative overflow-hidden">
-                                    <a class="detail" role="button"><img class="img-fluid" src="${ pageContext.servletContext.contextPath }/resources/img/property-1.jpg" alt=""></a>
-                                    <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-2 py-1 px-2">#남산타워</div>
+                            <div class="property-item rounded overflow-hidden" style="background:white;">
+                                <div class="position-relative overflow-hidden" style="max-width:600px; max=height:400px; padding:0px; align:center; vertical-align:middle;">
+                                    <a class="detail" role="button"><img style="height:400px; width:600px; object-fit: cover; align: center; vertical-align: middle;" class="img-fluid photo" src="${ pageContext.servletContext.contextPath }/resources/galleryimg/${ n.photo_path }" style="padding:0px;"></a>
+                                    <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-2 py-1 px-2">${ n.hashtag }</div>
 <!--	                            <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Appartment</div>-->
                                 </div>
                                 <div class="p-3 pb-0">
-                                    <h5 class="text-primary mb-2" style="float:left; margin:0px 10px 0px 0px;">Tester_ID</h5>
-									<h8 class="text-primary mb-3" style="float:left; margin:0px 10px 0px 0px;">여 행 중 독 자</h8>
+                                    <h5 class="text-primary mb-2" style="float:left; margin:0px 10px 0px 0px;">${ n.user_name }</h5>
+									<h8 class="text-primary mb-3" style="float:left; margin:0px 10px 0px 0px;">${ n.user_badge }</h8>
 									<i class="bi bi-heart fs-5" style="float:right;"></i>
 									<a><i class="bi bi-heart-fill fs-5" style="float:right; color:#e06666;"></i></a>
 <!--	                            <p style="clear:both;"><i class="fa fa-map-marker-alt text-primary me-2"></i><a class="text-dark" href="">서울 용산구 남산공원길 105</a></p>-->
                                 </div>
-<!--	                        <div class="d-flex border-top">-->
-<!--&lt;!&ndash;	                <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>&ndash;&gt;-->
-<!--	                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>-->
-<!--	                            <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>-->
-<!--	                        </div>-->
+
                             </div>
                         </div>
-                   	    <div class="testimonial-ite wow fadeInUp rounded p-3" data-wow-delay="0.1s">
-                            <div class="property-item rounded overflow-hidden">
-                                <div class="position-relative overflow-hidden">
-                                    <a class="detail" role="button"><img class="img-fluid" src="${ pageContext.servletContext.contextPath }/resources/img/property-1.jpg" alt=""></a>
-                                    <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-2 py-1 px-2">#남산타워</div>
-<!--	                            <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Appartment</div>-->
-                                </div>
-                                <div class="p-3 pb-0">
-                                    <h5 class="text-primary mb-2" style="float:left; margin:0px 10px 0px 0px;">Tester_ID</h5>
-									<h8 class="text-primary mb-3" style="float:left; margin:0px 10px 0px 0px;">여 행 중 독 자</h8>
-									<i class="bi bi-heart fs-5" style="float:right;"></i>
-									<a><i class="bi bi-heart-fill fs-5" style="float:right; color:#e06666;"></i></a>
-<!--	                            <p style="clear:both;"><i class="fa fa-map-marker-alt text-primary me-2"></i><a class="text-dark" href="">서울 용산구 남산공원길 105</a></p>-->
-                                </div>
-<!--	                        <div class="d-flex border-top">-->
-<!--&lt;!&ndash;	                <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>&ndash;&gt;-->
-<!--	                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>-->
-<!--	                            <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>-->
-<!--	                        </div>-->
-                            </div>
-                        </div>
-                   	    <div class="testimonial-ite wow fadeInUp rounded p-3" data-wow-delay="0.1s">
-                            <div class="property-item rounded overflow-hidden">
-                                <div class="position-relative overflow-hidden">
-                                    <a class="detail" role="button"><img class="img-fluid" src="${ pageContext.servletContext.contextPath }/resources/img/property-1.jpg" alt=""></a>
-                                    <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-2 py-1 px-2">#남산타워</div>
-<!--	                            <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Appartment</div>-->
-                                </div>
-                                <div class="p-3 pb-0">
-                                    <h5 class="text-primary mb-2" style="float:left; margin:0px 10px 0px 0px;">Tester_ID</h5>
-									<h8 class="text-primary mb-3" style="float:left; margin:0px 10px 0px 0px;">여 행 중 독 자</h8>
-									<i class="bi bi-heart fs-5" style="float:right;"></i>
-									<a><i class="bi bi-heart-fill fs-5" style="float:right; color:#e06666;"></i></a>
-<!--	                            <p style="clear:both;"><i class="fa fa-map-marker-alt text-primary me-2"></i><a class="text-dark" href="">서울 용산구 남산공원길 105</a></p>-->
-                                </div>
-<!--	                        <div class="d-flex border-top">-->
-<!--&lt;!&ndash;	                <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>&ndash;&gt;-->
-<!--	                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>-->
-<!--	                            <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>-->
-<!--	                        </div>-->
-                            </div>
-                        </div>
+                        </c:forEach>
+                        <!-- ------- -->
+                   	    
 	                </div>
 	            </div>
 	        </div>
@@ -374,7 +192,7 @@
 	
 	
 	        <!-- Back to Top -->
-	        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+	        <!-- <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a> -->
 	    </div>
 	    
 		<c:import url="/WEB-INF/views/parts/foot.jsp" />

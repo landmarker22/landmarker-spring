@@ -118,13 +118,6 @@ input[id="tab04"]:checked ~ .btn04 {
 	border-radius: 20px;
 }
 
-div.photobox {
-	height: 280px;
-	width: 280px;
-	overflow: hidden;
-	margin: 0 auto;
-}
-
 img.photo {
 	width: 100%;
 	height: 100%;
@@ -383,15 +376,13 @@ img.photo {
 									<div id="tab-1" class="tab-pane fade show p-0 active">
 										<div class="row g-4">
 											<!-- -----------------------올린게시물 컨텐츠----------------------------------- -->
-											<c:forEach items="${ requestScope.gallerylist }" var="g"
-												varStatus="status">
-
+											<c:forEach items="${ requestScope.gallerylist }" var="g">
 												<div class="col-lg-4 col-md-6 wow fadeInUp"
 													data-wow-delay="0.1s">
 													<div class="property-item rounded overflow-hidden"
 														style="box-shadow: 3px 4px 12px 3px gray; width: 100%; height: 100%; padding: 0px; margin: 0 auto;">
-														<div style="margin: 10 auto; position: relative;">
-															<a role="button" style="overflow: hidden;"> <img
+														<div style="margin: 10 auto; position: relative;">															
+															<a role="button" style="overflow: hidden;" href="http://localhost:8080/landmarker/gdetailview.do?g_no=${ g.gallery_no }"> <img
 																style="width: 400px; height: 400px; object-fit: cover; margin: -4px; align: center; vertical-align: middle;"
 																src="${ pageContext.servletContext.contextPath }/resources/galleryimg/${ g.photo_path }"></a>
 
@@ -515,12 +506,10 @@ img.photo {
 								<br>
 								<div class="owl-carousel testimonial-carousel wow "
 									data-wow-delay="0.1s">
-									<c:forEach items="${ requestScope.likelist }" var="b"
-										varStatus="status">
+									<c:forEach items="${ requestScope.likelist }" var="b">
+										<a href="http://localhost:8080/landmarker/gdetailview.do?g_no=${ b.gallery_no }">
 										<div class="testimonial-item rounded p-2"
 											style="width: 95%; height: 310px; box-shadow: 3px 4px 11px 3px #C3C3C3; margin: 12px 3px 15px 3px;">
-											
-											
 															<div style="float:left;width:50%; height:100%;">
 																<img class="photo"
 																	src="${ pageContext.servletContext.contextPath }/resources/galleryimg/${b.photo_path}" />
@@ -528,16 +517,16 @@ img.photo {
 															
 														
 															<div style="float:left;width:50%;">																
-																<b style="padding-left: 8px; font-size: 18px">${ b.hashtag }</b>
+																<b style="padding-left: 8px; font-size: 18px; color:black;">${ b.hashtag }</b>
 																<div style="height:5px;"></div>
 																<div style="padding-left: 8px; width:100%;">
-																<span style="word-wrap: break-word;float:none;font-size: 16px; opacity: 0.8;">${ b.gallery_content }<br>${ b.gallery_content }${ b.gallery_content }${ b.gallery_content }</span><br>
+																<span style="word-wrap: break-word;float:none;color:black;font-size: 16px; opacity: 0.8;">${ b.gallery_content }<br>${ b.gallery_content }${ b.gallery_content }${ b.gallery_content }</span><br>
 																</div>
-																<span style="position:absolute; bottom:6%; right:7%;padding-left: 8px;font-size: 16px; opacity: 0.8;"><b
+																<span style="position:absolute;color:black; bottom:6%; right:7%;padding-left: 8px;font-size: 16px; opacity: 0.8;"><b
 																	style="opacity: 0.5;">${ b.gallery_date }</b></span>	
 															</div>
-																								
 										</div>
+										</a>
 									</c:forEach>
 
 								</div>
@@ -546,7 +535,7 @@ img.photo {
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-12 col-md-12 wow fadeInUp" data-wow-delay="0.1s">
+					<div class="col-lg-12 col-md-12 wow fadeInUp mb-4" data-wow-delay="0.1s">
 						<div class="team-item rounded overflow-hidden">
 							<div class="p-4 mt-1">
 								<div class="tab_content">

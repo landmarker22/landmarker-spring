@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.lm.landmarker.user.model.vo.User;
 import com.lm.landmarker.banner.model.vo.Banner;
 import com.lm.landmarker.gallery.model.vo.Gallery;
+import com.lm.landmarker.galleryinfo.model.vo.Galleryinfo;
 import com.lm.landmarker.landmark.model.vo.Landmark;
 
 @Repository("userDao")
@@ -99,6 +100,11 @@ public class UserDao {
 	public int updateLoginOK(User user) {
 		return session.update("userMapper.updateLoginOK", user);
 	}
+	
+	public Object updateAdmin(User user) {
+		return session.update("userMapper.updateAdmin", user);
+	}
+
 
 		
 	// 장고 로그인
@@ -117,4 +123,17 @@ public class UserDao {
 	public int selectLink(String link_key) {		
 		return session.selectOne("userMapper.selectLink", link_key);
 	}
+
+	public ArrayList<Galleryinfo> new3List() {
+		List<Galleryinfo> list = session.selectList("userMapper.selectNew3");
+		return (ArrayList<Galleryinfo>)list;
+	}
+
+	public ArrayList<Galleryinfo> topWeekList() {
+		List<Galleryinfo> list = session.selectList("userMapper.selectTopWeek");
+		return (ArrayList<Galleryinfo>)list;
+	}
+
+	
+	
 }

@@ -244,8 +244,13 @@ public class UserController {
 	@RequestMapping(value = "searchUserName.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String SearchUserName(@RequestParam(name="user_name") String user_name, HttpServletResponse response) throws UnsupportedEncodingException {
+		ArrayList<User> list = null;
+		if(user_name==null || user_name.equals("")) {
+			list = userService.userList();
+		}else {
+			list = userService.searchName(user_name);
+		}
 		
-		ArrayList<User> list = userService.searchName(user_name);
 		JSONObject sendJson = new JSONObject();
 		JSONArray jarr = new JSONArray();
 		
@@ -272,38 +277,54 @@ public class UserController {
 		if(userService.updateLoginOK(user) > 0) {
 			String referer = request.getHeader("Referer");
 			return "redirect:"+ referer;
-//				return "redirect:manager.do";
+
 		}else {
 			model.addAttribute("message", "로그인 제한/허용 처리 오류 발생!");
 			return "common/error";
 		}
 		
 	}
-//	@RequestMapping(value="landmarkSearch.do", method=RequestMethod.POST)
-//	@ResponseBody
-//	public String LandmarkSearch(@RequestParam(name="search") String search, HttpServletResponse response) throws UnsupportedEncodingException {
-//		
-//		ArrayList<Landmark> list = userService.landmarkSearch(search);
-//		
-//		JSONObject sendJson = new JSONObject();
-//		
-//		JSONArray jarr = new JSONArray();
-//		
-//		for(Landmark landmark : list) {
-//			JSONObject job = new JSONObject();
-//			
-//			job.put("landmark_name", URLEncoder.encode(landmark.getLandmark_name(), "utf-8"));
-//			job.put("landmark_address", URLEncoder.encode(landmark.getLandmark_address(), "utf-8"));
-//			
-//			jarr.add(job);  
-//		}
-//		sendJson.put("list", jarr);
-//		
-//		
-//		return sendJson.toJSONString();
-//		
-//		
-//	}
+	@RequestMapping(value="changeLoginOK.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String changeLoginOKMethod(@RequestParam(name="user_no") int user_no, HttpServletResponse response) throws UnsupportedEncodingException {
+		
+		User user=userService.selectUserInfo(user_no);
+		
+		String yesno = user.getLogin_ok();
+		
+		if(yesno.equals("Y")) {
+			user.setLogin_ok("N");
+			userService.updateLoginOK(user);
+		}else {
+			user.setLogin_ok("Y");
+			userService.updateLoginOK(user);
+		}
+		JSONObject sendJson = new JSONObject();
+		
+		return sendJson.toJSONString();
+
+	}
+	
+	@RequestMapping(value="changeAdmin.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String changeAdmin(@RequestParam(name="user_no") int user_no, HttpServletResponse response) throws UnsupportedEncodingException {
+		
+		User user=userService.selectUserInfo(user_no);
+		
+		String admin = user.getUser_admin();
+		
+		if(admin.equals("Y")) {
+			user.setUser_admin("N");
+			userService.updateAdmin(user);
+		}else {
+			user.setUser_admin("Y");
+			userService.updateAdmin(user);
+		}
+		JSONObject sendJson = new JSONObject();
+		
+		return sendJson.toJSONString();
+
+	}
 
 	
 }
