@@ -35,7 +35,7 @@ hr {
 
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto">
-                <a href="/landmarker/" class="nav-item nav-link active">Home</a>
+                <a href="/landmarker/" class="nav-item nav-link">Home</a>
                 <a href="http://localhost:8080/landmarker/gallery.do" class="nav-item nav-link">Gallery</a>
                 <c:if test="${ empty sessionScope.loginUser }">
                 	<a href="#" class="nav-item nav-link" id="aa" data-bs-toggle="modal" data-bs-target="#exampleModal">login</a>
