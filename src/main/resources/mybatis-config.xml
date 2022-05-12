@@ -14,6 +14,8 @@
 		<typeAlias type="com.lm.landmarker.landmark.model.vo.Landmark" alias="Landmark" />
 		<typeAlias type="com.lm.landmarker.banner.model.vo.Banner" alias="Banner" />
 		<typeAlias type="com.lm.landmarker.galleryinfo.model.vo.Galleryinfo" alias="Galleryinfo" />
+		<typeAlias type="com.lm.landmarker.like.model.vo.Like" alias="Like" />
+		<typeAlias type="com.lm.landmarker.galleryinfo.model.vo.Gallerylikeinfo" alias="Gallerylikeinfo" />
 		<!-- <typeAlias type="com.lm.landmarker.comment.model.vo.Category" alias="Comment" /> -->
 		<!-- <typeAlias type="com.lm.landmarker.like.model.vo.Notice" alias="Like" /> -->
 		<!-- <typeAlias type="com.lm.landmarker.landmark.model.vo.Board" alias="Landmark" /> -->

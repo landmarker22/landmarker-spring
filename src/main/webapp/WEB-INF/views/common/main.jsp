@@ -124,8 +124,20 @@
 	                                    <div class="p-3 pb-0">
 	                                        <h5 class="text-primary mb-2" style="float:left; margin:0px 10px 0px 0px;">${ n.user_name }</h5>
 											<h8 class="text-primary mb-3" style="float:left; margin:0px 10px 0px 0px;">${ n.user_badge }</h8>
-											<i class="bi bi-heart fs-5" style="float:right;"></i>
-											<a><i class="bi bi-heart-fill fs-5" style="float:right; color:#e06666;"></i></a>
+											<c:if test="${ n.user_like ne 0 }">
+												<c:url var="heartX" value="heart.do">
+													<c:param name="heart" value="0" />
+													<c:param name="g_no" value="${ n.gallery_no }" />
+												</c:url>										
+												<a href="${ heartX }"><i class="bi bi-heart-fill fs-5" style="float:right; color:#e06666;"></i></a>
+											</c:if>
+											<c:if test="${ n.user_like eq 0 }">
+												<c:url var="heartO" value="heart.do">
+													<c:param name="heart" value="1" />
+													<c:param name="g_no" value="${ n.gallery_no }" />
+												</c:url>
+											<a href="${ heartO }"><i class="bi bi-heart fs-5" style="float:right;"></i></a>
+											</c:if>
 	                                    </div>
 	                                </div>
 	                            </div>
@@ -159,7 +171,7 @@
 	                </div>
 	                <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
                    	    <!-- --------------- -->
-                   	    <c:forEach items="${ requestScope.top3 }" var="n">
+                   	    <c:forEach items="${ requestScope.hot }" var="n">
                    	    <div class="testimonial-ite wow fadeInUp rounded p-3" data-wow-delay="0.1s">
                             <div class="property-item rounded overflow-hidden" style="background:white;">
                                 <div class="position-relative overflow-hidden" style="max-width:600px; max=height:400px; padding:0px; align:center; vertical-align:middle;">
@@ -170,9 +182,21 @@
                                 <div class="p-3 pb-0">
                                     <h5 class="text-primary mb-2" style="float:left; margin:0px 10px 0px 0px;">${ n.user_name }</h5>
 									<h8 class="text-primary mb-3" style="float:left; margin:0px 10px 0px 0px;">${ n.user_badge }</h8>
-									<i class="bi bi-heart fs-5" style="float:right;"></i>
-									<a><i class="bi bi-heart-fill fs-5" style="float:right; color:#e06666;"></i></a>
-<!--	                            <p style="clear:both;"><i class="fa fa-map-marker-alt text-primary me-2"></i><a class="text-dark" href="">서울 용산구 남산공원길 105</a></p>-->
+									<c:if test="${ n.user_like ne 0 }">
+										<c:url var="heartX" value="heart.do">
+											<c:param name="heart" value="0" />
+											<c:param name="g_no" value="${ n.gallery_no }" />
+										</c:url>										
+										<a href="${ heartX }"><i class="bi bi-heart-fill fs-5" style="float:right; color:#e06666;"></i></a>
+									</c:if>
+									<c:if test="${ n.user_like eq 0 }">
+										<c:url var="heartO" value="heart.do">
+											<c:param name="heart" value="1" />
+											<c:param name="g_no" value="${ n.gallery_no }" />
+										</c:url>
+									<a href="${ heartO }"><i class="bi bi-heart fs-5" style="float:right;"></i></a>
+									</c:if>
+ 
                                 </div>
 
                             </div>

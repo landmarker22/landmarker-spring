@@ -12,7 +12,9 @@ import com.lm.landmarker.user.model.vo.User;
 import com.lm.landmarker.banner.model.vo.Banner;
 import com.lm.landmarker.gallery.model.vo.Gallery;
 import com.lm.landmarker.galleryinfo.model.vo.Galleryinfo;
+import com.lm.landmarker.galleryinfo.model.vo.Gallerylikeinfo;
 import com.lm.landmarker.landmark.model.vo.Landmark;
+import com.lm.landmarker.like.model.vo.Like;
 
 @Repository("userDao")
 public class UserDao {
@@ -128,12 +130,38 @@ public class UserDao {
 		List<Galleryinfo> list = session.selectList("userMapper.selectNew3");
 		return (ArrayList<Galleryinfo>)list;
 	}
+	public ArrayList<Gallerylikeinfo> new3likeList(int user_no) {
+		List<Gallerylikeinfo> list = session.selectList("userMapper.selectNewLike3", user_no);
+		return (ArrayList<Gallerylikeinfo>)list;
+	}
 
 	public ArrayList<Galleryinfo> topWeekList() {
 		List<Galleryinfo> list = session.selectList("userMapper.selectTopWeek");
 		return (ArrayList<Galleryinfo>)list;
 	}
 
+	public int galleryCount() {
+		return session.selectOne("userMapper.allGalleryCount");
+	}
+
+	public ArrayList<Like> userLikeList(int user_no) {
+		List<Like> list = session.selectList("userMapper.userLikeList", user_no);
+		return (ArrayList<Like>)list;
+	}
+
+	
+	public void heartX(Map<String, Object> map) {
+		session.delete("userMapper.heartX", map);
+	}
+
+	public void heartO(Map<String, Object> map) {
+		session.insert("userMapper.heartO", map);
+	}
+
+	public ArrayList<Gallerylikeinfo> hotlikeList(int user_no) {
+		List<Gallerylikeinfo> list = session.selectList("userMapper.selectHotLike", user_no);
+		return (ArrayList<Gallerylikeinfo>)list;
+	}
 	
 	
 }

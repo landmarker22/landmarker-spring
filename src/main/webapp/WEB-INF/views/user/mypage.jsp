@@ -94,7 +94,7 @@ input[id="tab04"]:checked ~ .btn04 {
 }
 
 .search input {
-	width: 400px;
+	width: 60%;
 	height: 30px;
 	border: 2px solid rgb(209, 207, 207);
 	border-radius: 15px;
@@ -520,7 +520,7 @@ img.photo {
 																<b style="padding-left: 8px; font-size: 18px; color:black;">${ b.hashtag }</b>
 																<div style="height:5px;"></div>
 																<div style="padding-left: 8px; width:100%;">
-																<span style="word-wrap: break-word;float:none;color:black;font-size: 16px; opacity: 0.8;">${ b.gallery_content }<br>${ b.gallery_content }${ b.gallery_content }${ b.gallery_content }</span><br>
+																<span style="word-wrap: break-word;float:none;color:black;font-size: 16px; opacity: 0.8;">${ b.gallery_content }</span><br>
 																</div>
 																<span style="position:absolute;color:black; bottom:6%; right:7%;padding-left: 8px;font-size: 16px; opacity: 0.8;"><b
 																	style="opacity: 0.5;">${ b.gallery_date }</b></span>	
@@ -601,7 +601,7 @@ img.photo {
 																<c:when test="${ user.user_badge eq '갈곳은 많다' }">
 																	<div
 																		style="text-align: RIGHT; position: relative; top: 30px; right: 7%;">
-																		<b style="color: #31D288; font-size: 18px;">장착중</b>
+																		
 																	</div>
 																	<div class="position-relative"
 																		style="text-align: center; border: dashed 3px #31D288; border-radius: 30px;">
@@ -723,7 +723,7 @@ img.photo {
 																<c:when test="${ user.user_badge eq '어디까지 가봤니?' }">
 																	<div
 																		style="text-align: RIGHT; position: relative; top: 30px; right: 7%;">
-																		<b style="color: #31D288; font-size: 18px;">장착중</b>
+																		
 																	</div>
 																	<div class="position-relative"
 																		style="text-align: center; border: dashed 3px #31D288; border-radius: 30px;">
@@ -786,7 +786,6 @@ img.photo {
 																<c:when test="${ user.user_badge eq '소통왕' }">
 																	<div
 																		style="text-align: RIGHT; position: relative; top: 30px; right: 7%;">
-																		<b style="color: #31D288; font-size: 18px;">장착중</b>
 																	</div>
 																	<div class="position-relative"
 																		style="text-align: center; border: dashed 3px #31D288; border-radius: 30px;">
@@ -803,7 +802,7 @@ img.photo {
 																	<div class="position-relative"
 																		style="text-align: center;">
 
-																		<c:if test="${ board_count gt 20 }">
+																		<c:if test="${ reply_count gt 9 }">
 																			<form id="bdg5" action="badgeupdate.do">
 																				<input type="hidden" name="badge_name" value="소통왕">
 																				<a href="#" onclick="badge_form5()" class="detail"
@@ -814,12 +813,12 @@ img.photo {
 																					style="width: 60%; height: 60%; object-fit: cover;"
 																					src="${ pageContext.servletContext.contextPath }/resources/badge/sotong.png">
 																					<br> <br> <b
-																					style="margin-right: 2px; color: gray; opacity: 0.7; font-size: 19px;">소통왕?</b>
+																					style="margin-right: 2px; color: gray; opacity: 0.7; font-size: 19px;">소통왕</b>
 																				</a>
 																			</form>
 																		</c:if>
 
-																		<c:if test="${ board_count le 20 }">
+																		<c:if test="${ reply_count le 9 }">
 																		<div style="height:25px;"></div>
 																			<img class="tolltip"
 																				style="width: 60%; height: 60%; object-fit: cover;"
@@ -845,7 +844,6 @@ img.photo {
 																<c:when test="${ user.user_badge eq '여행중독자' }">
 																	<div
 																		style="text-align: RIGHT; position: relative; top: 30px; right: 7%;">
-																		<b style="color: #31D288; font-size: 18px;">장착중</b>
 																	</div>
 																	<div class="position-relative"
 																		style="text-align: center; border: dashed 3px #31D288; border-radius: 30px;">
@@ -910,7 +908,7 @@ img.photo {
 											<div class="search">
 												<input id="searchtag" type="text" size="30"
 													placeholder="검색어를 입력하세요..." onfocus="this.placeholder=''"
-													onblur="this.placeholder='검색어를 입력하세요...'" name="hashtag"  style="padding-left:12px"/>
+													onblur="this.placeholder='검색어를 입력하세요...'" name="hashtag"  style="padding-left:12px; margin-bottom:10px"/>
 												&nbsp;
 												<button id="btn1" class="btn btn-primary" type="submit" style="box-shadow: none;">search</button>
 											</div>

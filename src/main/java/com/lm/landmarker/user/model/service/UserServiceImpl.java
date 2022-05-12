@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import com.lm.landmarker.banner.model.vo.Banner;
 import com.lm.landmarker.gallery.model.vo.Gallery;
 import com.lm.landmarker.galleryinfo.model.vo.Galleryinfo;
+import com.lm.landmarker.galleryinfo.model.vo.Gallerylikeinfo;
 import com.lm.landmarker.landmark.model.vo.Landmark;
+import com.lm.landmarker.like.model.vo.Like;
 import com.lm.landmarker.user.model.dao.UserDao;
 import com.lm.landmarker.user.model.vo.User;
 
@@ -139,14 +141,48 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
+	
+
+	@Override
+	public ArrayList<Galleryinfo> topWeekList() {
+		return userDao.topWeekList();
+	}
+
+	@Override
+	public int gallery_count() {
+		return userDao.galleryCount();
+	}
+
+	@Override
+	public ArrayList<Like> userLikeList(int user_no) {
+		return userDao.userLikeList(user_no);
+	}
+
 	@Override
 	public ArrayList<Galleryinfo> new3List() {
 		return userDao.new3List();
 	}
 
 	@Override
-	public ArrayList<Galleryinfo> topWeekList() {
-		return userDao.topWeekList();
+	public ArrayList<Gallerylikeinfo> new3likeList(int user_no) {
+		return userDao.new3likeList(user_no);
+	}
+
+	@Override
+	public void heartX(Map<String, Object> map) {
+		userDao.heartX(map);
+		
+	}
+	
+	@Override
+	public void heartO(Map<String, Object> map) {
+		userDao.heartO(map);
+		
+	}
+
+	@Override
+	public ArrayList<Gallerylikeinfo> hotlikeList(int user_no) {
+		return userDao.hotlikeList(user_no);
 	}
 
 	

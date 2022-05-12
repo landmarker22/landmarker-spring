@@ -170,10 +170,12 @@ public class UserController {
 	}
 	@RequestMapping(value = "admin.do", method = RequestMethod.GET)
 	public ModelAndView admin(ModelAndView mv) {
+		int gallery_count = userService.gallery_count();
 		ArrayList<User> list = userService.userList();
 		ArrayList<Banner> banner= userService.bannerList();
 
 		if (list != null && list.size() > 0) {
+			mv.addObject("gallery_count", gallery_count);
 			mv.addObject("list", list);
 			mv.addObject("banner", banner);
 			mv.setViewName("user/adminpage");
@@ -197,7 +199,7 @@ public class UserController {
 	
 	@RequestMapping(value="insertBanner.do", method=RequestMethod.POST)
 	public String InsertBanner(@RequestParam(name="title") String title, 
-			@RequestParam(name="content") String content,
+			@RequestParam(name="uptext") String content,
 			@RequestParam(name="file") MultipartFile file,
 			HttpServletRequest request, Model model, Banner banner) {
 		

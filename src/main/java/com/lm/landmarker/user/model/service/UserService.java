@@ -7,7 +7,9 @@ import java.util.Map;
 import com.lm.landmarker.banner.model.vo.Banner;
 import com.lm.landmarker.gallery.model.vo.Gallery;
 import com.lm.landmarker.galleryinfo.model.vo.Galleryinfo;
+import com.lm.landmarker.galleryinfo.model.vo.Gallerylikeinfo;
 import com.lm.landmarker.landmark.model.vo.Landmark;
+import com.lm.landmarker.like.model.vo.Like;
 import com.lm.landmarker.user.model.vo.User;
 
 public interface UserService {
@@ -61,8 +63,19 @@ public interface UserService {
 
 	void updateAdmin(User user);
 
-	ArrayList<Galleryinfo> new3List();
-
 	ArrayList<Galleryinfo> topWeekList();
 
+	int gallery_count();
+
+	ArrayList<Like> userLikeList(int user_no);
+
+	ArrayList<Galleryinfo> new3List();
+	
+	ArrayList<Gallerylikeinfo> new3likeList(int user_no);
+
+	void heartX(Map<String, Object> map);
+	
+	void heartO(Map<String, Object> map);
+
+	ArrayList<Gallerylikeinfo> hotlikeList(int user_no);
 }
