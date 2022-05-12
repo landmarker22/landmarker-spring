@@ -384,7 +384,7 @@ img.photo {
 														<div style="margin: 10 auto; position: relative;">															
 															<a role="button" style="overflow: hidden;" href="http://localhost:8080/landmarker/gdetailview.do?g_no=${ g.gallery_no }"> <img
 																style="width: 400px; height: 400px; object-fit: cover; margin: -4px; align: center; vertical-align: middle;"
-																src="${ pageContext.servletContext.contextPath }/resources/galleryimg/${ g.photo_path }"></a>
+																src="http://localhost:8080/static/img/${ g.photo_path }"></a>
 
 															<b
 																style="transform: translate(-50%, -50%); position: absolute; bottom: 45%; left: 50%; color: white; text-align: center; text-shadow: 1px 1px 6px black;">${ g.hashtag }</b>
@@ -512,7 +512,7 @@ img.photo {
 											style="width: 95%; height: 310px; box-shadow: 3px 4px 11px 3px #C3C3C3; margin: 12px 3px 15px 3px;">
 															<div style="float:left;width:50%; height:100%;">
 																<img class="photo"
-																	src="${ pageContext.servletContext.contextPath }/resources/galleryimg/${b.photo_path}" />
+																	src="http://localhost:8080/static/img/${b.photo_path}" />
 															</div>
 															
 														

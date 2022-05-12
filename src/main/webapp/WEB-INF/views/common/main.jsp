@@ -119,7 +119,7 @@
 	                                    <div class="position-relative overflow-hidden" style="align: center; vertical-align: middle;">
 	                                        <a href="http://localhost:8080/landmarker/gdetailview.do?g_no=${ n.gallery_no }">
 	                                        	<img style="width: 520px; height: 400px; object-fit: cover; padding:0px; align: center; vertical-align: middle;" 
-	                                        	class="img-fluid photo" src="${ pageContext.servletContext.contextPath }/resources/galleryimg/${ n.photo_path }" >
+	                                        	class="img-fluid photo" src="$http://localhost:8080/static/img/${ n.photo_path }" >
 	                                        </a>
 	                                        <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-2 py-1 px-2">${ n.hashtag }</div>
 	                                    </div>
@@ -178,7 +178,7 @@
                             <div class="property-item rounded overflow-hidden" style="background:white;">
                                 <div class="position-relative overflow-hidden" style="max-width:600px; max=height:400px; padding:0px; align:center; vertical-align:middle;">
                                     <a href="http://localhost:8080/landmarker/gdetailview.do?g_no=${ n.gallery_no }">
-                                    	<img style="height:400px; width:600px; object-fit: cover; align: center; vertical-align: middle;" class="img-fluid photo" src="${ pageContext.servletContext.contextPath }/resources/galleryimg/${ n.photo_path }" style="padding:0px;">
+                                    	<img style="height:400px; width:600px; object-fit: cover; align: center; vertical-align: middle;" class="img-fluid photo" src="http://localhost:8080/static/img/${ n.photo_path }" style="padding:0px;">
                                     </a>
                                     <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-2 py-1 px-2">${ n.hashtag }</div>
 <!--	                            <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Appartment</div>-->
